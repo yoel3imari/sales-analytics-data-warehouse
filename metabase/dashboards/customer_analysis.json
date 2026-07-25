@@ -1,0 +1,64 @@
+{
+    "name": "Customer Analysis",
+    "description": "Customer segmentation, acquisition, and behavior analysis",
+    "cards": [
+        {
+            "name": "Customer Segment Breakdown",
+            "display": "pie",
+            "row": 0,
+            "col": 0,
+            "size_x": 8,
+            "size_y": 6,
+            "query": {
+                "query": {
+                    "aggregation": [["count", []]],
+                    "breakout": [["field", "value_segment", null]]
+                }
+            }
+        },
+        {
+            "name": "Revenue per Customer",
+            "display": "bar",
+            "row": 0,
+            "col": 8,
+            "size_x": 8,
+            "size_y": 6,
+            "query": {
+                "query": {
+                    "aggregation": [["sum", ["field", "net_revenue", null]]],
+                    "breakout": [["field", "customer_id", null]],
+                    "order-by": [["desc", ["aggregation", 0]]],
+                    "limit": 20
+                }
+            }
+        },
+        {
+            "name": "Customer Acquisition Over Time",
+            "display": "line",
+            "row": 6,
+            "col": 0,
+            "size_x": 8,
+            "size_y": 6,
+            "query": {
+                "query": {
+                    "aggregation": [["count", []]],
+                    "breakout": [["field", "signup_date", {"source-field": "customer_sk"}]]
+                }
+            }
+        },
+        {
+            "name": "Customer Geography Map",
+            "display": "map",
+            "row": 6,
+            "col": 8,
+            "size_x": 8,
+            "size_y": 6,
+            "query": {
+                "query": {
+                    "aggregation": [["count", []]],
+                    "breakout": [["field", "customer_state", null]]
+                }
+            }
+        }
+    ]
+}
