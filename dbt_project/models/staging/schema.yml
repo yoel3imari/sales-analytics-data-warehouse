@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned and standardized customer data with surrogate key"
+    columns:
+      - name: customer_sk
+        description: "Surrogate key for SCD Type 2 tracking"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        tests:
+          - not_null
+      - name: cohort
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["LOYAL_HEAVY", "LOYAL_LIGHT", "GROWING", "DECLINING", "ONE_SHOT", "CHURN_RISK"]
+
+  - name: stg_products
+    description: "Cleaned and standardized product data"
+    columns:
+      - name: product_sk
+        description: "Surrogate key"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        tests:
+          - not_null
+      - name: list_price
+        tests:
+          - not_null
+
+  - name: stg_sales
+    description: "Cleaned sales data with bad data flags"
+    columns:
+      - name: order_line_sk
+        description: "Composite key (order_id + line_item_id)"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: quantity
+        tests:
+          - not_null
+      - name: unit_price
+        tests:
+          - not_null

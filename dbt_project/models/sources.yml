@@ -1,0 +1,62 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: bronze
+    description: "Raw data loaded directly from CSV files via COPY INTO"
+    loader: duckdb
+    tables:
+      - name: raw_customers
+        description: "Raw customer data from CSV"
+        columns:
+          - name: customer_id
+            description: "Unique customer identifier"
+          - name: first_name
+          - name: last_name
+          - name: email
+          - name: phone
+          - name: address_line1
+          - name: address_line2
+          - name: city
+          - name: state
+          - name: postal_code
+          - name: country
+          - name: birth_date
+          - name: gender
+          - name: income_bracket
+          - name: cohort
+          - name: signup_date
+          - name: last_update_date
+
+      - name: raw_products
+        description: "Raw product catalog data from CSV"
+        columns:
+          - name: product_id
+          - name: product_name
+          - name: category
+          - name: subcategory
+          - name: brand
+          - name: list_price
+          - name: standard_cost
+          - name: color
+          - name: size
+          - name: weight_kg
+          - name: launch_date
+          - name: discontinued_date
+
+      - name: raw_sales
+        description: "Raw sales transactions from CSV"
+        columns:
+          - name: order_id
+          - name: line_item_id
+          - name: order_date
+          - name: customer_id
+          - name: product_id
+          - name: quantity
+          - name: unit_price
+          - name: discount_amount
+          - name: ship_date
+          - name: ship_city
+          - name: ship_state
+          - name: ship_country
+          - name: channel
