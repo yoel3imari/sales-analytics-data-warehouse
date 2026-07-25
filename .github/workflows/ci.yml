@@ -1,0 +1,64 @@
+name: dbt CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dbt-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Generate synthetic data
+        run: uv run python -m src.generate --seed 42
+
+      - name: Create DuckDB directory
+        run: mkdir -p data/warehouse
+
+      - name: Initialize DuckDB warehouse
+        run: uv run python -c "
+          import duckdb
+          conn = duckdb.connect('data/warehouse/sales_analytics.duckdb')
+          conn.execute('CREATE SCHEMA IF NOT EXISTS bronze')
+          conn.execute('CREATE SCHEMA IF NOT EXISTS silver')
+          conn.execute('CREATE SCHEMA IF NOT EXISTS gold')
+          conn.execute('CREATE SCHEMA IF NOT EXISTS snapshots')
+          conn.execute(\"CREATE TABLE bronze.raw_customers AS SELECT * FROM read_csv_auto('data/raw/raw_customers.csv')\")
+          conn.execute(\"CREATE TABLE bronze.raw_products AS SELECT * FROM read_csv_auto('data/raw/raw_products.csv')\")
+          conn.execute(\"CREATE TABLE bronze.raw_sales AS SELECT * FROM read_csv_auto('data/raw/raw_sales.csv')\")
+          conn.close()
+          print('Warehouse initialized successfully')
+          "
+
+      - name: Install dbt and DuckDB adapter
+        run: pip install dbt-core dbt-duckdb
+
+      - name: Run dbt deps
+        run: cd dbt_project && dbt deps --profiles-dir .
+
+      - name: Run dbt build (models only)
+        run: cd dbt_project && dbt build --profiles-dir . --select staging+intermediate+marts+snapshots
+
+      - name: Run dbt tests (schema — should pass)
+        run: cd dbt_project && dbt test --profiles-dir . --exclude tag:data_quality
+
+      - name: Run data quality tests (expected to fail — demonstrates bad data detection)
+        run: cd dbt_project && dbt test --profiles-dir . --select tag:data_quality || echo "DATA_QUALITY_ISSUES_DETECTED=true"

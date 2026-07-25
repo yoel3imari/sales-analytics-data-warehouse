@@ -1,0 +1,10 @@
+=== Step 5: Star Schema Tables ===
+Found 8 user tables/views:
+  bronze.raw_customers (BASE TABLE)
+  bronze.raw_products (BASE TABLE)
+  bronze.raw_sales (BASE TABLE)
+  main_silver.stg_customers (VIEW)
+  main_silver.stg_products (VIEW)
+  main_silver.stg_sales (VIEW)
+  snapshots.snap_customers (BASE TABLE)
+  snapshots.snap_products (BASE TABLE)

@@ -1,0 +1,174 @@
+[0m22:22:35  Running with dbt=1.12.0
+[0m22:22:36  Registered adapter: duckdb=1.10.1
+[0m22:22:36  Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m22:22:40  [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `accepted_values` defined on 'stg_customers'
+in package 'sales_analytics' (models/staging/schema.yml). Arguments to generic
+tests should be nested under the `arguments` property.
+[0m22:22:40  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 4 unused configuration paths:
+- models.sales_analytics.marts.analytics
+- models.sales_analytics.marts.dims
+- models.sales_analytics.marts.facts
+- seeds.sales_analytics
+[0m22:22:41  Found 11 models, 2 snapshots, 65 data tests, 3 sources, 486 macros
+[0m22:22:41  
+[0m22:22:41  Concurrency: 4 threads (target='dev')
+[0m22:22:41  
+[0m22:22:41  1 of 75 START sql table model main_gold.dim_date ............................... [RUN]
+[0m22:22:41  2 of 75 START sql view model main_silver.stg_customers ......................... [RUN]
+[0m22:22:41  3 of 75 START sql view model main_silver.stg_products .......................... [RUN]
+[0m22:22:41  4 of 75 START sql view model main_silver.stg_sales ............................. [RUN]
+[0m22:22:41  3 of 75 OK created sql view model main_silver.stg_products ..................... [[32mOK[0m in 0.28s]
+[0m22:22:41  2 of 75 OK created sql view model main_silver.stg_customers .................... [[32mOK[0m in 0.28s]
+[0m22:22:41  1 of 75 OK created sql table model main_gold.dim_date .......................... [[32mOK[0m in 0.29s]
+[0m22:22:41  4 of 75 OK created sql view model main_silver.stg_sales ........................ [[32mOK[0m in 0.29s]
+[0m22:22:41  5 of 75 START test test_data_freshness ......................................... [RUN]
+[0m22:22:41  6 of 75 START test not_null_stg_products_list_price ............................ [RUN]
+[0m22:22:41  7 of 75 START test not_null_stg_products_product_id ............................ [RUN]
+[0m22:22:41  8 of 75 START test not_null_stg_products_product_name .......................... [RUN]
+[0m22:22:41  5 of 75 WARN 2 test_data_freshness ............................................. [[33mWARN 2[0m in 0.15s]
+[0m22:22:41  6 of 75 PASS not_null_stg_products_list_price .................................. [[32mPASS[0m in 0.15s]
+[0m22:22:41  7 of 75 PASS not_null_stg_products_product_id .................................. [[32mPASS[0m in 0.16s]
+[0m22:22:41  9 of 75 START test not_null_stg_products_product_sk ............................ [RUN]
+[0m22:22:41  8 of 75 PASS not_null_stg_products_product_name ................................ [[32mPASS[0m in 0.16s]
+[0m22:22:41  10 of 75 START test unique_stg_products_product_id ............................. [RUN]
+[0m22:22:41  11 of 75 START test unique_stg_products_product_sk ............................. [RUN]
+[0m22:22:41  12 of 75 START test accepted_values_stg_customers_cohort__LOYAL_HEAVY__LOYAL_LIGHT__GROWING__DECLINING__ONE_SHOT__CHURN_RISK  [RUN]
+[0m22:22:42  9 of 75 PASS not_null_stg_products_product_sk .................................. [[32mPASS[0m in 0.10s]
+[0m22:22:42  13 of 75 START test not_null_stg_customers_cohort .............................. [RUN]
+[0m22:22:42  10 of 75 PASS unique_stg_products_product_id ................................... [[32mPASS[0m in 0.13s]
+[0m22:22:42  12 of 75 PASS accepted_values_stg_customers_cohort__LOYAL_HEAVY__LOYAL_LIGHT__GROWING__DECLINING__ONE_SHOT__CHURN_RISK  [[32mPASS[0m in 0.09s]
+[0m22:22:42  11 of 75 PASS unique_stg_products_product_sk ................................... [[32mPASS[0m in 0.13s]
+[0m22:22:42  14 of 75 START test not_null_stg_customers_customer_id ......................... [RUN]
+[0m22:22:42  15 of 75 START test not_null_stg_customers_customer_sk ......................... [RUN]
+[0m22:22:42  16 of 75 START test not_null_stg_customers_email ............................... [RUN]
+[0m22:22:42  13 of 75 PASS not_null_stg_customers_cohort .................................... [[32mPASS[0m in 0.11s]
+[0m22:22:42  17 of 75 START test unique_stg_customers_customer_id ........................... [RUN]
+[0m22:22:42  14 of 75 PASS not_null_stg_customers_customer_id ............................... [[32mPASS[0m in 0.11s]
+[0m22:22:42  16 of 75 PASS not_null_stg_customers_email ..................................... [[32mPASS[0m in 0.11s]
+[0m22:22:42  15 of 75 PASS not_null_stg_customers_customer_sk ............................... [[32mPASS[0m in 0.11s]
+[0m22:22:42  18 of 75 START test unique_stg_customers_customer_sk ........................... [RUN]
+[0m22:22:42  19 of 75 START test not_null_dim_date_date_actual .............................. [RUN]
+[0m22:22:42  20 of 75 START test not_null_dim_date_date_sk .................................. [RUN]
+[0m22:22:42  17 of 75 PASS unique_stg_customers_customer_id ................................. [[32mPASS[0m in 0.11s]
+[0m22:22:42  21 of 75 START test not_null_dim_date_year ..................................... [RUN]
+[0m22:22:42  19 of 75 PASS not_null_dim_date_date_actual .................................... [[32mPASS[0m in 0.10s]
+[0m22:22:42  18 of 75 PASS unique_stg_customers_customer_sk ................................. [[32mPASS[0m in 0.10s]
+[0m22:22:42  22 of 75 START test unique_dim_date_date_actual ................................ [RUN]
+[0m22:22:42  20 of 75 PASS not_null_dim_date_date_sk ........................................ [[32mPASS[0m in 0.11s]
+[0m22:22:42  23 of 75 START test unique_dim_date_date_sk .................................... [RUN]
+[0m22:22:42  24 of 75 START test not_null_stg_sales_order_id ................................ [RUN]
+[0m22:22:42  21 of 75 PASS not_null_dim_date_year ........................................... [[32mPASS[0m in 0.12s]
+[0m22:22:42  25 of 75 START test not_null_stg_sales_order_line_sk ........................... [RUN]
+[0m22:22:42  23 of 75 PASS unique_dim_date_date_sk .......................................... [[32mPASS[0m in 0.12s]
+[0m22:22:42  22 of 75 PASS unique_dim_date_date_actual ...................................... [[32mPASS[0m in 0.12s]
+[0m22:22:42  24 of 75 PASS not_null_stg_sales_order_id ...................................... [[32mPASS[0m in 0.10s]
+[0m22:22:42  26 of 75 START test not_null_stg_sales_quantity ................................ [RUN]
+[0m22:22:42  27 of 75 START test not_null_stg_sales_unit_price .............................. [RUN]
+[0m22:22:42  28 of 75 START test relationships_stg_sales_customer_id__customer_id__ref_stg_customers_  [RUN]
+[0m22:22:42  26 of 75 PASS not_null_stg_sales_quantity ...................................... [[32mPASS[0m in 0.11s]
+[0m22:22:42  29 of 75 START test relationships_stg_sales_product_id__product_id__ref_stg_products_  [RUN]
+[0m22:22:42  25 of 75 PASS not_null_stg_sales_order_line_sk ................................. [[32mPASS[0m in 0.21s]
+[0m22:22:42  27 of 75 PASS not_null_stg_sales_unit_price .................................... [[32mPASS[0m in 0.16s]
+[0m22:22:42  30 of 75 START test test_no_duplicate_order_lines .............................. [RUN]
+[0m22:22:42  31 of 75 START test test_no_future_dates ....................................... [RUN]
+[0m22:22:42  28 of 75 PASS relationships_stg_sales_customer_id__customer_id__ref_stg_customers_  [[32mPASS[0m in 0.16s]
+[0m22:22:42  32 of 75 START test test_no_negative_quantity .................................. [RUN]
+[0m22:22:42  29 of 75 PASS relationships_stg_sales_product_id__product_id__ref_stg_products_  [[32mPASS[0m in 0.15s]
+[0m22:22:42  31 of 75 FAIL 1 test_no_future_dates ........................................... [[31mFAIL 1[0m in 0.10s]
+[0m22:22:42  33 of 75 START test test_no_zero_price_items ................................... [RUN]
+[0m22:22:42  34 of 75 START test unique_stg_sales_order_line_sk ............................. [RUN]
+[0m22:22:42  30 of 75 FAIL 5 test_no_duplicate_order_lines .................................. [[31mFAIL 5[0m in 0.17s]
+[0m22:22:42  32 of 75 FAIL 1 test_no_negative_quantity ...................................... [[31mFAIL 1[0m in 0.15s]
+[0m22:22:42  35 of 75 START snapshot snapshots.snap_products ................................ [RUN]
+[0m22:22:42  36 of 75 START snapshot snapshots.snap_customers ............................... [RUN]
+[0m22:22:42  33 of 75 FAIL 1 test_no_zero_price_items ....................................... [[31mFAIL 1[0m in 0.12s]
+[0m22:22:43  34 of 75 FAIL 5 unique_stg_sales_order_line_sk ................................. [[31mFAIL 5[0m in 0.36s]
+[0m22:22:43  37 of 75 SKIP relation main_gold.dim_customer due to ephemeral model status 'skipped'  [[31mERROR SKIP[0m]
+[0m22:22:43  38 of 75 SKIP relation main_gold.dim_product due to ephemeral model status 'skipped'  [[31mERROR SKIP[0m]
+[0m22:22:43  39 of 75 SKIP test accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH  [[33mSKIP[0m]
+[0m22:22:43  40 of 75 SKIP test not_null_dim_customer_cohort ................................ [[33mSKIP[0m]
+[0m22:22:43  41 of 75 SKIP test not_null_dim_customer_customer_id ........................... [[33mSKIP[0m]
+[0m22:22:43  42 of 75 SKIP test not_null_dim_customer_customer_sk ........................... [[33mSKIP[0m]
+[0m22:22:43  43 of 75 SKIP test not_null_dim_customer_email ................................. [[33mSKIP[0m]
+[0m22:22:43  44 of 75 SKIP test unique_dim_customer_customer_id ............................. [[33mSKIP[0m]
+[0m22:22:43  45 of 75 SKIP test unique_dim_customer_customer_sk ............................. [[33mSKIP[0m]
+[0m22:22:43  46 of 75 SKIP test not_null_dim_product_list_price ............................. [[33mSKIP[0m]
+[0m22:22:43  47 of 75 SKIP test not_null_dim_product_product_id ............................. [[33mSKIP[0m]
+[0m22:22:43  48 of 75 SKIP test not_null_dim_product_product_name ........................... [[33mSKIP[0m]
+[0m22:22:43  49 of 75 SKIP test not_null_dim_product_product_sk ............................. [[33mSKIP[0m]
+[0m22:22:43  50 of 75 SKIP test unique_dim_product_product_id ............................... [[33mSKIP[0m]
+[0m22:22:43  51 of 75 SKIP test unique_dim_product_product_sk ............................... [[33mSKIP[0m]
+[0m22:22:43  35 of 75 OK snapshotted snapshots.snap_products ................................ [[32mOK[0m in 0.41s]
+[0m22:22:43  52 of 75 SKIP relation main_gold.fact_sales .................................... [[33mSKIP[0m]
+[0m22:22:43  53 of 75 SKIP test accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B  [[33mSKIP[0m]
+[0m22:22:43  54 of 75 SKIP test accepted_values_fact_sales_is_bad_data_record__0__1 ......... [[33mSKIP[0m]
+[0m22:22:43  55 of 75 SKIP test accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10  [[33mSKIP[0m]
+[0m22:22:43  56 of 75 SKIP test not_null_fact_sales_channel ................................. [[33mSKIP[0m]
+[0m22:22:43  57 of 75 SKIP test not_null_fact_sales_customer_sk ............................. [[33mSKIP[0m]
+[0m22:22:43  58 of 75 SKIP test not_null_fact_sales_net_revenue ............................. [[33mSKIP[0m]
+[0m22:22:43  59 of 75 SKIP test not_null_fact_sales_order_date_sk ........................... [[33mSKIP[0m]
+[0m22:22:43  60 of 75 SKIP test not_null_fact_sales_order_id ................................ [[33mSKIP[0m]
+[0m22:22:43  61 of 75 SKIP test not_null_fact_sales_order_line_sk ........................... [[33mSKIP[0m]
+[0m22:22:43  62 of 75 SKIP test not_null_fact_sales_product_sk .............................. [[33mSKIP[0m]
+[0m22:22:43  63 of 75 SKIP test not_null_fact_sales_profit_margin_pct ....................... [[33mSKIP[0m]
+[0m22:22:43  64 of 75 SKIP test not_null_fact_sales_quantity ................................ [[33mSKIP[0m]
+[0m22:22:43  65 of 75 SKIP test not_null_fact_sales_unit_price .............................. [[33mSKIP[0m]
+[0m22:22:43  66 of 75 SKIP test relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_  [[33mSKIP[0m]
+[0m22:22:43  36 of 75 OK snapshotted snapshots.snap_customers ............................... [[32mOK[0m in 0.46s]
+[0m22:22:43  67 of 75 SKIP test relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_  [[33mSKIP[0m]
+[0m22:22:43  68 of 75 SKIP test relationships_fact_sales_product_sk__product_sk__ref_dim_product_  [[33mSKIP[0m]
+[0m22:22:43  69 of 75 SKIP test test_daily_sales_positive ................................... [[33mSKIP[0m]
+[0m22:22:43  70 of 75 SKIP test test_dimensional_completeness ............................... [[33mSKIP[0m]
+[0m22:22:43  71 of 75 SKIP test test_no_null_customer_sk_in_fact ............................ [[33mSKIP[0m]
+[0m22:22:43  72 of 75 SKIP test test_profit_margin_range .................................... [[33mSKIP[0m]
+[0m22:22:43  73 of 75 SKIP test unique_fact_sales_order_line_sk ............................. [[33mSKIP[0m]
+[0m22:22:43  74 of 75 START test test_customer_scd2_validity ................................ [RUN]
+[0m22:22:43  75 of 75 SKIP relation main_gold.obt_sales ..................................... [[33mSKIP[0m]
+[0m22:22:43  74 of 75 PASS test_customer_scd2_validity ...................................... [[32mPASS[0m in 0.05s]
+[0m22:22:43  
+[0m22:22:43  Finished running 1 incremental model, 2 snapshots, 4 table models, 65 data tests, 3 view models in 0 hours 0 minutes and 2.17 seconds (2.17s).
+[0m22:22:43  
+[0m22:22:43  [31mCompleted with 7 errors, 0 partial successes, and 1 warning:[0m
+[0m22:22:43  
+[0m22:22:43  [[31mERROR[0m]: in test test_no_future_dates (tests/test_no_future_dates.sql)
+[0m22:22:43    Got 1 result, configured to fail if != 0
+[0m22:22:43  
+[0m22:22:43    compiled code at target/compiled/sales_analytics/tests/test_no_future_dates.sql
+[0m22:22:43  
+[0m22:22:43  [[31mERROR[0m]: in test test_no_duplicate_order_lines (tests/test_no_duplicate_order_lines.sql)
+[0m22:22:43    Got 5 results, configured to fail if != 0
+[0m22:22:43  
+[0m22:22:43    compiled code at target/compiled/sales_analytics/tests/test_no_duplicate_order_lines.sql
+[0m22:22:43  
+[0m22:22:43  [[31mERROR[0m]: in test test_no_negative_quantity (tests/test_no_negative_quantity.sql)
+[0m22:22:43    Got 1 result, configured to fail if != 0
+[0m22:22:43  
+[0m22:22:43    compiled code at target/compiled/sales_analytics/tests/test_no_negative_quantity.sql
+[0m22:22:43  
+[0m22:22:43  [[31mERROR[0m]: in test test_no_zero_price_items (tests/test_no_zero_price_items.sql)
+[0m22:22:43    Got 1 result, configured to fail if != 0
+[0m22:22:43  
+[0m22:22:43    compiled code at target/compiled/sales_analytics/tests/test_no_zero_price_items.sql
+[0m22:22:43  
+[0m22:22:43  [[31mERROR[0m]: in test unique_stg_sales_order_line_sk (models/staging/schema.yml)
+[0m22:22:43    Got 5 results, configured to fail if != 0
+[0m22:22:43  
+[0m22:22:43    compiled code at target/compiled/sales_analytics/models/staging/schema.yml/unique_stg_sales_order_line_sk.sql
+[0m22:22:43  
+[0m22:22:43  [[33mWARNING[0m]: in test test_data_freshness (tests/test_data_freshness.sql)
+[0m22:22:43  [[33mWARNING[0m]: Got 2 results, configured to warn if != 0
+[0m22:22:43  
+[0m22:22:43    compiled code at target/compiled/sales_analytics/tests/test_data_freshness.sql
+[0m22:22:43  
+[0m22:22:43  Done. PASS=31 WARN=1 ERROR=5 SKIP=38 NO-OP=0 REUSED=0 TOTAL=75
+[0m22:22:43  [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 10 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+EXIT_CODE: 

@@ -1,0 +1,156 @@
+[0m22:24:37  Running with dbt=1.12.0
+[0m22:24:38  Registered adapter: duckdb=1.10.1
+[0m22:24:39  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 4 unused configuration paths:
+- models.sales_analytics.marts.analytics
+- models.sales_analytics.marts.facts
+- models.sales_analytics.marts.dims
+- seeds.sales_analytics
+[0m22:24:39  Found 11 models, 2 snapshots, 65 data tests, 3 sources, 486 macros
+[0m22:24:39  
+[0m22:24:39  Concurrency: 4 threads (target='dev')
+[0m22:24:39  
+[0m22:24:39  1 of 61 START test accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH  [RUN]
+[0m22:24:39  2 of 61 START test accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B  [RUN]
+[0m22:24:39  3 of 61 START test accepted_values_fact_sales_is_bad_data_record__0__1 ......... [RUN]
+[0m22:24:39  4 of 61 START test accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10  [RUN]
+[0m22:24:40  3 of 61 PASS accepted_values_fact_sales_is_bad_data_record__0__1 ............... [[32mPASS[0m in 0.22s]
+[0m22:24:40  1 of 61 PASS accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH  [[32mPASS[0m in 0.24s]
+[0m22:24:40  4 of 61 PASS accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10  [[32mPASS[0m in 0.23s]
+[0m22:24:40  2 of 61 PASS accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B .. [[32mPASS[0m in 0.24s]
+[0m22:24:40  5 of 61 START test accepted_values_stg_customers_cohort__LOYAL_HEAVY__LOYAL_LIGHT__GROWING__DECLINING__ONE_SHOT__CHURN_RISK  [RUN]
+[0m22:24:40  6 of 61 START test not_null_dim_customer_cohort ................................ [RUN]
+[0m22:24:40  7 of 61 START test not_null_dim_customer_customer_id ........................... [RUN]
+[0m22:24:40  8 of 61 START test not_null_dim_customer_customer_sk ........................... [RUN]
+[0m22:24:40  6 of 61 PASS not_null_dim_customer_cohort ...................................... [[32mPASS[0m in 0.12s]
+[0m22:24:40  7 of 61 PASS not_null_dim_customer_customer_id ................................. [[32mPASS[0m in 0.12s]
+[0m22:24:40  8 of 61 PASS not_null_dim_customer_customer_sk ................................. [[32mPASS[0m in 0.12s]
+[0m22:24:40  5 of 61 PASS accepted_values_stg_customers_cohort__LOYAL_HEAVY__LOYAL_LIGHT__GROWING__DECLINING__ONE_SHOT__CHURN_RISK  [[32mPASS[0m in 0.15s]
+[0m22:24:40  9 of 61 START test not_null_dim_customer_email ................................. [RUN]
+[0m22:24:40  10 of 61 START test not_null_dim_date_date_actual .............................. [RUN]
+[0m22:24:40  11 of 61 START test not_null_dim_date_date_sk .................................. [RUN]
+[0m22:24:40  12 of 61 START test not_null_dim_date_year ..................................... [RUN]
+[0m22:24:40  9 of 61 PASS not_null_dim_customer_email ....................................... [[32mPASS[0m in 0.10s]
+[0m22:24:40  11 of 61 PASS not_null_dim_date_date_sk ........................................ [[32mPASS[0m in 0.09s]
+[0m22:24:40  13 of 61 START test not_null_dim_product_list_price ............................ [RUN]
+[0m22:24:40  12 of 61 PASS not_null_dim_date_year ........................................... [[32mPASS[0m in 0.10s]
+[0m22:24:40  10 of 61 PASS not_null_dim_date_date_actual .................................... [[32mPASS[0m in 0.10s]
+[0m22:24:40  14 of 61 START test not_null_dim_product_product_id ............................ [RUN]
+[0m22:24:40  15 of 61 START test not_null_dim_product_product_name .......................... [RUN]
+[0m22:24:40  16 of 61 START test not_null_dim_product_product_sk ............................ [RUN]
+[0m22:24:40  13 of 61 PASS not_null_dim_product_list_price .................................. [[32mPASS[0m in 0.10s]
+[0m22:24:40  17 of 61 START test not_null_fact_sales_channel ................................ [RUN]
+[0m22:24:40  14 of 61 PASS not_null_dim_product_product_id .................................. [[32mPASS[0m in 0.10s]
+[0m22:24:40  15 of 61 PASS not_null_dim_product_product_name ................................ [[32mPASS[0m in 0.10s]
+[0m22:24:40  16 of 61 PASS not_null_dim_product_product_sk .................................. [[32mPASS[0m in 0.10s]
+[0m22:24:40  18 of 61 START test not_null_fact_sales_customer_sk ............................ [RUN]
+[0m22:24:40  19 of 61 START test not_null_fact_sales_net_revenue ............................ [RUN]
+[0m22:24:40  20 of 61 START test not_null_fact_sales_order_date_sk .......................... [RUN]
+[0m22:24:40  17 of 61 PASS not_null_fact_sales_channel ...................................... [[32mPASS[0m in 0.10s]
+[0m22:24:40  21 of 61 START test not_null_fact_sales_order_id ............................... [RUN]
+[0m22:24:40  18 of 61 PASS not_null_fact_sales_customer_sk .................................. [[32mPASS[0m in 0.10s]
+[0m22:24:40  20 of 61 PASS not_null_fact_sales_order_date_sk ................................ [[32mPASS[0m in 0.09s]
+[0m22:24:40  19 of 61 PASS not_null_fact_sales_net_revenue .................................. [[32mPASS[0m in 0.11s]
+[0m22:24:40  22 of 61 START test not_null_fact_sales_order_line_sk .......................... [RUN]
+[0m22:24:40  23 of 61 START test not_null_fact_sales_product_sk ............................. [RUN]
+[0m22:24:40  24 of 61 START test not_null_fact_sales_profit_margin_pct ...................... [RUN]
+[0m22:24:40  21 of 61 PASS not_null_fact_sales_order_id ..................................... [[32mPASS[0m in 0.11s]
+[0m22:24:40  25 of 61 START test not_null_fact_sales_quantity ............................... [RUN]
+[0m22:24:40  23 of 61 PASS not_null_fact_sales_product_sk ................................... [[32mPASS[0m in 0.10s]
+[0m22:24:40  22 of 61 PASS not_null_fact_sales_order_line_sk ................................ [[32mPASS[0m in 0.10s]
+[0m22:24:40  24 of 61 PASS not_null_fact_sales_profit_margin_pct ............................ [[32mPASS[0m in 0.11s]
+[0m22:24:40  26 of 61 START test not_null_fact_sales_unit_price ............................. [RUN]
+[0m22:24:40  27 of 61 START test not_null_stg_customers_cohort .............................. [RUN]
+[0m22:24:40  28 of 61 START test not_null_stg_customers_customer_id ......................... [RUN]
+[0m22:24:40  25 of 61 PASS not_null_fact_sales_quantity ..................................... [[32mPASS[0m in 0.11s]
+[0m22:24:40  26 of 61 PASS not_null_fact_sales_unit_price ................................... [[32mPASS[0m in 0.09s]
+[0m22:24:40  29 of 61 START test not_null_stg_customers_customer_sk ......................... [RUN]
+[0m22:24:40  30 of 61 START test not_null_stg_customers_email ............................... [RUN]
+[0m22:24:40  27 of 61 PASS not_null_stg_customers_cohort .................................... [[32mPASS[0m in 0.10s]
+[0m22:24:40  31 of 61 START test not_null_stg_products_list_price ........................... [RUN]
+[0m22:24:40  28 of 61 PASS not_null_stg_customers_customer_id ............................... [[32mPASS[0m in 0.11s]
+[0m22:24:40  32 of 61 START test not_null_stg_products_product_id ........................... [RUN]
+[0m22:24:40  29 of 61 PASS not_null_stg_customers_customer_sk ............................... [[32mPASS[0m in 0.12s]
+[0m22:24:40  30 of 61 PASS not_null_stg_customers_email ..................................... [[32mPASS[0m in 0.12s]
+[0m22:24:40  31 of 61 PASS not_null_stg_products_list_price ................................. [[32mPASS[0m in 0.10s]
+[0m22:24:40  33 of 61 START test not_null_stg_products_product_name ......................... [RUN]
+[0m22:24:40  32 of 61 PASS not_null_stg_products_product_id ................................. [[32mPASS[0m in 0.07s]
+[0m22:24:40  34 of 61 START test not_null_stg_products_product_sk ........................... [RUN]
+[0m22:24:40  35 of 61 START test not_null_stg_sales_order_id ................................ [RUN]
+[0m22:24:40  36 of 61 START test not_null_stg_sales_order_line_sk ........................... [RUN]
+[0m22:24:41  33 of 61 PASS not_null_stg_products_product_name ............................... [[32mPASS[0m in 0.12s]
+[0m22:24:41  37 of 61 START test not_null_stg_sales_quantity ................................ [RUN]
+[0m22:24:41  34 of 61 PASS not_null_stg_products_product_sk ................................. [[32mPASS[0m in 0.12s]
+[0m22:24:41  38 of 61 START test not_null_stg_sales_unit_price .............................. [RUN]
+[0m22:24:41  35 of 61 PASS not_null_stg_sales_order_id ...................................... [[32mPASS[0m in 0.20s]
+[0m22:24:41  36 of 61 PASS not_null_stg_sales_order_line_sk ................................. [[32mPASS[0m in 0.21s]
+[0m22:24:41  39 of 61 START test relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_  [RUN]
+[0m22:24:41  40 of 61 START test relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_  [RUN]
+[0m22:24:41  37 of 61 PASS not_null_stg_sales_quantity ...................................... [[32mPASS[0m in 0.16s]
+[0m22:24:41  38 of 61 PASS not_null_stg_sales_unit_price .................................... [[32mPASS[0m in 0.18s]
+[0m22:24:41  41 of 61 START test relationships_fact_sales_product_sk__product_sk__ref_dim_product_  [RUN]
+[0m22:24:41  42 of 61 START test relationships_stg_sales_customer_id__customer_id__ref_stg_customers_  [RUN]
+[0m22:24:41  40 of 61 PASS relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_ ... [[32mPASS[0m in 0.16s]
+[0m22:24:41  39 of 61 PASS relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_  [[32mPASS[0m in 0.20s]
+[0m22:24:41  41 of 61 PASS relationships_fact_sales_product_sk__product_sk__ref_dim_product_  [[32mPASS[0m in 0.13s]
+[0m22:24:41  43 of 61 START test relationships_stg_sales_product_id__product_id__ref_stg_products_  [RUN]
+[0m22:24:41  44 of 61 START test test_customer_scd2_validity ................................ [RUN]
+[0m22:24:41  45 of 61 START test test_daily_sales_positive .................................. [RUN]
+[0m22:24:41  42 of 61 PASS relationships_stg_sales_customer_id__customer_id__ref_stg_customers_  [[32mPASS[0m in 0.18s]
+[0m22:24:41  46 of 61 START test test_data_freshness ........................................ [RUN]
+[0m22:24:41  43 of 61 PASS relationships_stg_sales_product_id__product_id__ref_stg_products_  [[32mPASS[0m in 0.10s]
+[0m22:24:41  47 of 61 START test test_dimensional_completeness .............................. [RUN]
+[0m22:24:41  44 of 61 PASS test_customer_scd2_validity ...................................... [[32mPASS[0m in 0.13s]
+[0m22:24:41  45 of 61 PASS test_daily_sales_positive ........................................ [[32mPASS[0m in 0.10s]
+[0m22:24:41  48 of 61 START test test_no_null_customer_sk_in_fact ........................... [RUN]
+[0m22:24:41  49 of 61 START test test_profit_margin_range ................................... [RUN]
+[0m22:24:41  46 of 61 WARN 2 test_data_freshness ............................................ [[33mWARN 2[0m in 0.09s]
+[0m22:24:41  50 of 61 START test unique_dim_customer_customer_id ............................ [RUN]
+[0m22:24:41  47 of 61 PASS test_dimensional_completeness .................................... [[32mPASS[0m in 0.12s]
+[0m22:24:41  51 of 61 START test unique_dim_customer_customer_sk ............................ [RUN]
+[0m22:24:41  48 of 61 PASS test_no_null_customer_sk_in_fact ................................. [[32mPASS[0m in 0.11s]
+[0m22:24:41  49 of 61 PASS test_profit_margin_range ......................................... [[32mPASS[0m in 0.11s]
+[0m22:24:41  52 of 61 START test unique_dim_date_date_actual ................................ [RUN]
+[0m22:24:41  53 of 61 START test unique_dim_date_date_sk .................................... [RUN]
+[0m22:24:41  50 of 61 PASS unique_dim_customer_customer_id .................................. [[32mPASS[0m in 0.14s]
+[0m22:24:41  54 of 61 START test unique_dim_product_product_id .............................. [RUN]
+[0m22:24:41  51 of 61 PASS unique_dim_customer_customer_sk .................................. [[32mPASS[0m in 0.11s]
+[0m22:24:41  52 of 61 PASS unique_dim_date_date_actual ...................................... [[32mPASS[0m in 0.10s]
+[0m22:24:41  55 of 61 START test unique_dim_product_product_sk .............................. [RUN]
+[0m22:24:41  56 of 61 START test unique_fact_sales_order_line_sk ............................ [RUN]
+[0m22:24:41  53 of 61 PASS unique_dim_date_date_sk .......................................... [[32mPASS[0m in 0.10s]
+[0m22:24:41  57 of 61 START test unique_stg_customers_customer_id ........................... [RUN]
+[0m22:24:41  54 of 61 PASS unique_dim_product_product_id .................................... [[32mPASS[0m in 0.11s]
+[0m22:24:41  58 of 61 START test unique_stg_customers_customer_sk ........................... [RUN]
+[0m22:24:41  55 of 61 PASS unique_dim_product_product_sk .................................... [[32mPASS[0m in 0.11s]
+[0m22:24:41  59 of 61 START test unique_stg_products_product_id ............................. [RUN]
+[0m22:24:41  57 of 61 PASS unique_stg_customers_customer_id ................................. [[32mPASS[0m in 0.13s]
+[0m22:24:41  60 of 61 START test unique_stg_products_product_sk ............................. [RUN]
+[0m22:24:42  58 of 61 PASS unique_stg_customers_customer_sk ................................. [[32mPASS[0m in 0.16s]
+[0m22:24:42  61 of 61 START test unique_stg_sales_order_line_sk ............................. [RUN]
+[0m22:24:42  56 of 61 FAIL 1 unique_fact_sales_order_line_sk ................................ [[31mFAIL 1[0m in 0.26s]
+[0m22:24:42  59 of 61 PASS unique_stg_products_product_id ................................... [[32mPASS[0m in 0.15s]
+[0m22:24:42  60 of 61 PASS unique_stg_products_product_sk ................................... [[32mPASS[0m in 0.12s]
+[0m22:24:42  61 of 61 FAIL 5 unique_stg_sales_order_line_sk ................................. [[31mFAIL 5[0m in 0.24s]
+[0m22:24:42  
+[0m22:24:42  Finished running 61 data tests in 0 hours 0 minutes and 2.64 seconds (2.64s).
+[0m22:24:42  
+[0m22:24:42  [31mCompleted with 2 errors, 0 partial successes, and 1 warning:[0m
+[0m22:24:42  
+[0m22:24:42  [[31mERROR[0m]: in test unique_fact_sales_order_line_sk (models/marts/schema.yml)
+[0m22:24:42    Got 1 result, configured to fail if != 0
+[0m22:24:42  
+[0m22:24:42    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_fact_sales_order_line_sk.sql
+[0m22:24:42  
+[0m22:24:42  [[31mERROR[0m]: in test unique_stg_sales_order_line_sk (models/staging/schema.yml)
+[0m22:24:42    Got 5 results, configured to fail if != 0
+[0m22:24:42  
+[0m22:24:42    compiled code at target/compiled/sales_analytics/models/staging/schema.yml/unique_stg_sales_order_line_sk.sql
+[0m22:24:42  
+[0m22:24:42  [[33mWARNING[0m]: in test test_data_freshness (tests/test_data_freshness.sql)
+[0m22:24:42  [[33mWARNING[0m]: Got 2 results, configured to warn if != 0
+[0m22:24:42  
+[0m22:24:42    compiled code at target/compiled/sales_analytics/tests/test_data_freshness.sql
+[0m22:24:42  
+[0m22:24:42  Done. PASS=58 WARN=1 ERROR=2 SKIP=0 NO-OP=0 REUSED=0 TOTAL=61
+SCHEMA_EXIT: 

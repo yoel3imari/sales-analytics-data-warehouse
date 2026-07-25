@@ -1,0 +1,47 @@
+[0m22:15:39  Running with dbt=1.12.0
+[0m22:15:40  Registered adapter: duckdb=1.10.1
+[0m22:15:40  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 4 unused configuration paths:
+- models.sales_analytics.marts.dims
+- models.sales_analytics.marts.facts
+- models.sales_analytics.marts.analytics
+- seeds.sales_analytics
+[0m22:15:41  Found 11 models, 2 snapshots, 65 data tests, 3 sources, 486 macros
+[0m22:15:41  
+[0m22:15:41  Concurrency: 4 threads (target='dev')
+[0m22:15:41  
+[0m22:15:41  1 of 4 START test test_no_duplicate_order_lines ................................ [RUN]
+[0m22:15:41  2 of 4 START test test_no_future_dates ......................................... [RUN]
+[0m22:15:41  3 of 4 START test test_no_negative_quantity .................................... [RUN]
+[0m22:15:41  4 of 4 START test test_no_zero_price_items ..................................... [RUN]
+[0m22:15:42  3 of 4 FAIL 1 test_no_negative_quantity ........................................ [[31mFAIL 1[0m in 0.24s]
+[0m22:15:42  2 of 4 FAIL 1 test_no_future_dates ............................................. [[31mFAIL 1[0m in 0.24s]
+[0m22:15:42  4 of 4 FAIL 1 test_no_zero_price_items ......................................... [[31mFAIL 1[0m in 0.25s]
+[0m22:15:42  1 of 4 FAIL 5 test_no_duplicate_order_lines .................................... [[31mFAIL 5[0m in 0.32s]
+[0m22:15:42  
+[0m22:15:42  Finished running 4 data tests in 0 hours 0 minutes and 0.72 seconds (0.72s).
+[0m22:15:42  
+[0m22:15:42  [31mCompleted with 4 errors, 0 partial successes, and 0 warnings:[0m
+[0m22:15:42  
+[0m22:15:42  [[31mERROR[0m]: in test test_no_negative_quantity (tests/test_no_negative_quantity.sql)
+[0m22:15:42    Got 1 result, configured to fail if != 0
+[0m22:15:42  
+[0m22:15:42    compiled code at target/compiled/sales_analytics/tests/test_no_negative_quantity.sql
+[0m22:15:42  
+[0m22:15:42  [[31mERROR[0m]: in test test_no_future_dates (tests/test_no_future_dates.sql)
+[0m22:15:42    Got 1 result, configured to fail if != 0
+[0m22:15:42  
+[0m22:15:42    compiled code at target/compiled/sales_analytics/tests/test_no_future_dates.sql
+[0m22:15:42  
+[0m22:15:42  [[31mERROR[0m]: in test test_no_zero_price_items (tests/test_no_zero_price_items.sql)
+[0m22:15:42    Got 1 result, configured to fail if != 0
+[0m22:15:42  
+[0m22:15:42    compiled code at target/compiled/sales_analytics/tests/test_no_zero_price_items.sql
+[0m22:15:42  
+[0m22:15:42  [[31mERROR[0m]: in test test_no_duplicate_order_lines (tests/test_no_duplicate_order_lines.sql)
+[0m22:15:42    Got 5 results, configured to fail if != 0
+[0m22:15:42  
+[0m22:15:42    compiled code at target/compiled/sales_analytics/tests/test_no_duplicate_order_lines.sql
+[0m22:15:42  
+[0m22:15:42  Done. PASS=0 WARN=0 ERROR=4 SKIP=0 NO-OP=0 REUSED=0 TOTAL=4
+EXIT_CODE: 1

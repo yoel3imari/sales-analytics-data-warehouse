@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<string>", line 10, in <module>
+_duckdb.BinderException: Binder Error: Referenced column "customer_id" not found in FROM clause!
+Candidate bindings: "subcategory", "list_price", "product_id", "category", "color"
+
+LINE 1: ... (SELECT customer_id FROM snapshots."snap_products" GROUP BY customer_id HAVING count(*) > 1)
+                                                                        ^
+=== SCD2 Snapshots ===
+  Tables: ['snap_customers', 'snap_products']
+  snap_customers: 10,000 rows, 0 with multiple versions
+  snap_products: 80 rows, 0 with multiple versions

@@ -1,0 +1,76 @@
+{
+  "active_plan": "/Users/yusef/projects/portfolio/sales-analytics/.sisyphus/plans/sales-analytics-warehouse.md",
+  "started_at": "2026-07-25T20:51:35.083Z",
+  "session_ids": [
+    "ses_064f3d31cffeNHt2BSWvz71ZVu"
+  ],
+  "session_origins": {
+    "ses_064f3d31cffeNHt2BSWvz71ZVu": "direct"
+  },
+  "plan_name": "sales-analytics-warehouse",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "Project Scaffolding + Config Files",
+      "session_id": "ses_064f2a810ffeqZlTsXlSWHaO14",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-07-25T20:56:00.666Z"
+    },
+    "todo:6": {
+      "task_key": "todo:6",
+      "task_label": "6",
+      "task_title": "dbt Staging Models + Source Definitions",
+      "session_id": "ses_064d3cfceffee8OyN14Pa38fRJ",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-07-25T21:27:55.436Z"
+    },
+    "todo:9": {
+      "task_key": "todo:9",
+      "task_label": "9",
+      "task_title": "dbt Intermediate Models",
+      "session_id": "ses_064ca1572ffejTd79PW7A7PUjh",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-07-25T21:38:54.358Z"
+    },
+    "todo:11": {
+      "task_key": "todo:11",
+      "task_label": "11",
+      "task_title": "dbt Fact Model (fact_sales, incremental)",
+      "session_id": "ses_064c5aacaffe7XtG4Gl8evpMzN",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-07-25T21:44:02.720Z"
+    },
+    "todo:12": {
+      "task_key": "todo:12",
+      "task_label": "12",
+      "task_title": "dbt Tests (Schema + 10 Singular Tests + Bad Data Checks)",
+      "session_id": "ses_064c21131ffeU23322z5chc5XL",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "updated_at": "2026-07-25T21:48:17.132Z"
+    },
+    "todo:15": {
+      "task_key": "todo:15",
+      "task_label": "15",
+      "task_title": "GitHub Actions CI",
+      "session_id": "ses_064bdd244ffeONtXJ21LzwadV7",
+      "agent": "Sisyphus-Junior",
+      "category": "writing",
+      "updated_at": "2026-07-25T21:59:49.688Z"
+    },
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "**Plan Compliance Audit** — `oracle`",
+      "session_id": "ses_064b4306dffeGGGRAoPAFxk2l4",
+      "agent": "oracle",
+      "updated_at": "2026-07-25T22:03:35.005Z"
+    }
+  }
+}

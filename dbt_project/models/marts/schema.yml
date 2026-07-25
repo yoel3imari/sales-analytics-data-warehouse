@@ -20,6 +20,11 @@ models:
       - name: cohort
         tests:
           - not_null
+      - name: income_bracket
+        description: "Customer income classification"
+        tests:
+          - accepted_values:
+              values: ["LOW", "MEDIUM", "HIGH", "VERY_HIGH"]
 
   - name: dim_product
     description: "Product dimension with category hierarchy and enriched metrics"
@@ -92,10 +97,22 @@ models:
       - name: quantity
         tests:
           - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       - name: unit_price
         tests:
           - not_null
       - name: net_revenue
+        tests:
+          - not_null
+      - name: channel
+        description: "Sales channel"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["Online", "Retail", "Catalog", "B2B"]
+      - name: profit_margin_pct
+        description: "Profit margin percentage"
         tests:
           - not_null
       - name: is_bad_data_record

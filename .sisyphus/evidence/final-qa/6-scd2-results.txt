@@ -1,0 +1,27 @@
+=== SCENARIO 6: SCD Type 2 Verification ===
+- seeds.sales_analytics
+[0m22:16:35  Found 11 models, 2 snapshots, 65 data tests, 3 sources, 486 macros
+[0m22:16:35  
+[0m22:16:35  Concurrency: 4 threads (target='dev')
+[0m22:16:35  
+[0m22:16:35  1 of 2 START snapshot snapshots.snap_customers ................................. [RUN]
+[0m22:16:35  2 of 2 START snapshot snapshots.snap_products .................................. [RUN]
+[0m22:16:36  2 of 2 OK snapshotted snapshots.snap_products .................................. [[32mOK[0m in 0.66s]
+[0m22:16:36  1 of 2 OK snapshotted snapshots.snap_customers ................................. [[32mOK[0m in 0.67s]
+[0m22:16:36  
+[0m22:16:36  Finished running 2 snapshots in 0 hours 0 minutes and 0.93 seconds (0.93s).
+[0m22:16:36  
+[0m22:16:36  [32mCompleted successfully[0m
+[0m22:16:36  
+[0m22:16:36  Done. PASS=2 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=2
+
+--- Customers with multiple SCD2 versions ---
+Snapshots: ['snap_customers', 'snap_products']
+snap_customers rows: 10000
+snap_products rows: 80
+
+Customers with multiple SCD2 versions:
+Total customers with multiple versions: 0
+
+Products with multiple SCD2 versions:
+Total products with multiple versions: 0

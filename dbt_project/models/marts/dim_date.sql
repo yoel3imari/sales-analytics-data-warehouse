@@ -14,7 +14,7 @@ with date_spine as (
                 date '2026-12-31',
                 interval '1 day'
             )
-        ) as date_actual
+        )::date as date_actual
 ),
 
 date_dim as (
@@ -58,7 +58,7 @@ date_dim as (
         date_trunc('year', date_actual) as year_start_date,
 
         -- First/last day of month
-        date_actual - (date_part('day', date_actual) - 1) as first_day_of_month,
+        date_actual - cast((date_part('day', date_actual) - 1) as integer) as first_day_of_month,
         (date_trunc('month', date_actual) + interval '1 month' - interval '1 day')::date as last_day_of_month,
 
         -- Season

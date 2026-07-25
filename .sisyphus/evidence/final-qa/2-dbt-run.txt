@@ -1,0 +1,35 @@
+[0m22:23:35  Running with dbt=1.12.0
+[0m22:23:36  Registered adapter: duckdb=1.10.1
+[0m22:23:37  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 4 unused configuration paths:
+- models.sales_analytics.marts.dims
+- models.sales_analytics.marts.facts
+- models.sales_analytics.marts.analytics
+- seeds.sales_analytics
+[0m22:23:37  Found 11 models, 2 snapshots, 65 data tests, 3 sources, 486 macros
+[0m22:23:37  
+[0m22:23:37  Concurrency: 4 threads (target='dev')
+[0m22:23:37  
+[0m22:23:37  1 of 8 START sql table model main_gold.dim_date ................................ [RUN]
+[0m22:23:37  2 of 8 START sql view model main_silver.stg_customers .......................... [RUN]
+[0m22:23:37  3 of 8 START sql view model main_silver.stg_products ........................... [RUN]
+[0m22:23:37  4 of 8 START sql view model main_silver.stg_sales .............................. [RUN]
+[0m22:23:38  4 of 8 OK created sql view model main_silver.stg_sales ......................... [[32mOK[0m in 0.30s]
+[0m22:23:38  3 of 8 OK created sql view model main_silver.stg_products ...................... [[32mOK[0m in 0.31s]
+[0m22:23:38  2 of 8 OK created sql view model main_silver.stg_customers ..................... [[32mOK[0m in 0.32s]
+[0m22:23:38  1 of 8 OK created sql table model main_gold.dim_date ........................... [[32mOK[0m in 0.37s]
+[0m22:23:38  5 of 8 START sql table model main_gold.dim_product ............................. [RUN]
+[0m22:23:38  6 of 8 START sql table model main_gold.dim_customer ............................ [RUN]
+[0m22:23:38  5 of 8 OK created sql table model main_gold.dim_product ........................ [[32mOK[0m in 0.27s]
+[0m22:23:38  6 of 8 OK created sql table model main_gold.dim_customer ....................... [[32mOK[0m in 0.42s]
+[0m22:23:38  7 of 8 START sql incremental model main_gold.fact_sales ........................ [RUN]
+[0m22:23:43  7 of 8 OK created sql incremental model main_gold.fact_sales ................... [[32mOK[0m in 4.64s]
+[0m22:23:43  8 of 8 START sql table model main_gold.obt_sales ............................... [RUN]
+[0m22:23:57  8 of 8 OK created sql table model main_gold.obt_sales .......................... [[32mOK[0m in 13.82s]
+[0m22:23:57  
+[0m22:23:57  Finished running 1 incremental model, 4 table models, 3 view models in 0 hours 0 minutes and 19.57 seconds (19.57s).
+[0m22:23:57  
+[0m22:23:57  [32mCompleted successfully[0m
+[0m22:23:57  
+[0m22:23:57  Done. PASS=8 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=8
+RUN_EXIT: 

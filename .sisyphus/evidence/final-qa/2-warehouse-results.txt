@@ -1,0 +1,9 @@
+100% ▕██████████████████████████████████████▏ (00:00:03.33 elapsed)     
+Connected in 0.02s
+Schemas created
+Customers loaded: 10000
+Products loaded: 80
+Sales loaded: 782059
+Bronze tables: ['raw_customers', 'raw_products', 'raw_sales']
+Total time: 4.16s
+Warehouse initialized successfully

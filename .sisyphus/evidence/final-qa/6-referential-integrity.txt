@@ -1,0 +1,6 @@
+=== Referential Integrity Checks ===
+  fact_sales → dim_customer (customer_sk): 0 orphans [OK]
+  fact_sales → dim_product (product_sk): 0 orphans [OK]
+  fact_sales → dim_date order (order_date_sk): 0 orphans [OK]
+
+  Overall: ALL OK

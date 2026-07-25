@@ -1,0 +1,8 @@
+=== dim_date Range ===
+  min: 2022-01-01
+  max: 2026-12-31
+  rows: 1,826
+  Expected min: 2022-01-01 → ✓
+  Expected max: 2026-12-31 → ✓
+  Rows >= 1825: ✓ (1,826)
+  Range check: PASS

@@ -1,0 +1,8 @@
+=== SCENARIO 7: Referential Integrity ===
+Note: Gold tables not built due to dim_date model error.
+Checking staging-level referential integrity instead:
+
+stg_sales → stg_customers (customer_id): 1 orphans
+stg_sales → stg_products (product_id): 0 orphans
+
+Gold layer fact_sales does not exist — skipped gold FK checks

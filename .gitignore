@@ -10,6 +10,7 @@ dist/
 # Data (raw generated CSV + DuckDB warehouse)
 data/raw/
 data/warehouse/
+*.duckdb
 
 # dbt
 dbt_project/target/
@@ -30,6 +31,9 @@ airflow/airflow.db
 # OS
 .DS_Store
 Thumbs.db
+
+# Metabase
+metabase/plugins/
 
 # Environment
 .env

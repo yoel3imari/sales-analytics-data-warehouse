@@ -1,0 +1,541 @@
+[0m22:15:07  Running with dbt=1.12.0
+[0m22:15:07  Registered adapter: duckdb=1.10.1
+[0m22:15:08  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 4 unused configuration paths:
+- models.sales_analytics.marts.facts
+- models.sales_analytics.marts.dims
+- models.sales_analytics.marts.analytics
+- seeds.sales_analytics
+[0m22:15:08  Found 11 models, 2 snapshots, 65 data tests, 3 sources, 486 macros
+[0m22:15:08  
+[0m22:15:08  Concurrency: 4 threads (target='dev')
+[0m22:15:08  
+[0m22:15:08  1 of 61 START test accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH  [RUN]
+[0m22:15:08  2 of 61 START test accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B  [RUN]
+[0m22:15:08  3 of 61 START test accepted_values_fact_sales_is_bad_data_record__0__1 ......... [RUN]
+[0m22:15:08  4 of 61 START test accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10  [RUN]
+[0m22:15:09  2 of 61 ERROR accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B . [[31mERROR[0m in 0.24s]
+[0m22:15:09  4 of 61 ERROR accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10  [[31mERROR[0m in 0.25s]
+[0m22:15:09  3 of 61 ERROR accepted_values_fact_sales_is_bad_data_record__0__1 .............. [[31mERROR[0m in 0.25s]
+[0m22:15:09  1 of 61 ERROR accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH  [[31mERROR[0m in 0.26s]
+[0m22:15:09  5 of 61 START test accepted_values_stg_customers_cohort__LOYAL_HEAVY__LOYAL_LIGHT__GROWING__DECLINING__ONE_SHOT__CHURN_RISK  [RUN]
+[0m22:15:09  6 of 61 START test not_null_dim_customer_cohort ................................ [RUN]
+[0m22:15:09  7 of 61 START test not_null_dim_customer_customer_id ........................... [RUN]
+[0m22:15:09  8 of 61 START test not_null_dim_customer_customer_sk ........................... [RUN]
+[0m22:15:09  5 of 61 PASS accepted_values_stg_customers_cohort__LOYAL_HEAVY__LOYAL_LIGHT__GROWING__DECLINING__ONE_SHOT__CHURN_RISK  [[32mPASS[0m in 0.14s]
+[0m22:15:09  9 of 61 START test not_null_dim_customer_email ................................. [RUN]
+[0m22:15:09  7 of 61 ERROR not_null_dim_customer_customer_id ................................ [[31mERROR[0m in 0.15s]
+[0m22:15:09  6 of 61 ERROR not_null_dim_customer_cohort ..................................... [[31mERROR[0m in 0.16s]
+[0m22:15:09  8 of 61 ERROR not_null_dim_customer_customer_sk ................................ [[31mERROR[0m in 0.13s]
+[0m22:15:09  10 of 61 START test not_null_dim_date_date_actual .............................. [RUN]
+[0m22:15:09  11 of 61 START test not_null_dim_date_date_sk .................................. [RUN]
+[0m22:15:09  12 of 61 START test not_null_dim_date_year ..................................... [RUN]
+[0m22:15:09  9 of 61 ERROR not_null_dim_customer_email ...................................... [[31mERROR[0m in 0.11s]
+[0m22:15:09  13 of 61 START test not_null_dim_product_list_price ............................ [RUN]
+[0m22:15:09  10 of 61 ERROR not_null_dim_date_date_actual ................................... [[31mERROR[0m in 0.11s]
+[0m22:15:09  14 of 61 START test not_null_dim_product_product_id ............................ [RUN]
+[0m22:15:09  11 of 61 ERROR not_null_dim_date_date_sk ....................................... [[31mERROR[0m in 0.13s]
+[0m22:15:09  12 of 61 ERROR not_null_dim_date_year .......................................... [[31mERROR[0m in 0.13s]
+[0m22:15:09  15 of 61 START test not_null_dim_product_product_name .......................... [RUN]
+[0m22:15:09  16 of 61 START test not_null_dim_product_product_sk ............................ [RUN]
+[0m22:15:09  13 of 61 ERROR not_null_dim_product_list_price ................................. [[31mERROR[0m in 0.12s]
+[0m22:15:09  17 of 61 START test not_null_fact_sales_channel ................................ [RUN]
+[0m22:15:09  14 of 61 ERROR not_null_dim_product_product_id ................................. [[31mERROR[0m in 0.14s]
+[0m22:15:09  18 of 61 START test not_null_fact_sales_customer_sk ............................ [RUN]
+[0m22:15:09  15 of 61 ERROR not_null_dim_product_product_name ............................... [[31mERROR[0m in 0.13s]
+[0m22:15:09  16 of 61 ERROR not_null_dim_product_product_sk ................................. [[31mERROR[0m in 0.12s]
+[0m22:15:09  19 of 61 START test not_null_fact_sales_net_revenue ............................ [RUN]
+[0m22:15:09  20 of 61 START test not_null_fact_sales_order_date_sk .......................... [RUN]
+[0m22:15:09  17 of 61 ERROR not_null_fact_sales_channel ..................................... [[31mERROR[0m in 0.13s]
+[0m22:15:09  21 of 61 START test not_null_fact_sales_order_id ............................... [RUN]
+[0m22:15:09  18 of 61 ERROR not_null_fact_sales_customer_sk ................................. [[31mERROR[0m in 0.12s]
+[0m22:15:09  19 of 61 ERROR not_null_fact_sales_net_revenue ................................. [[31mERROR[0m in 0.10s]
+[0m22:15:09  22 of 61 START test not_null_fact_sales_order_line_sk .......................... [RUN]
+[0m22:15:09  23 of 61 START test not_null_fact_sales_product_sk ............................. [RUN]
+[0m22:15:09  20 of 61 ERROR not_null_fact_sales_order_date_sk ............................... [[31mERROR[0m in 0.12s]
+[0m22:15:09  24 of 61 START test not_null_fact_sales_profit_margin_pct ...................... [RUN]
+[0m22:15:09  21 of 61 ERROR not_null_fact_sales_order_id .................................... [[31mERROR[0m in 0.12s]
+[0m22:15:09  25 of 61 START test not_null_fact_sales_quantity ............................... [RUN]
+[0m22:15:09  22 of 61 ERROR not_null_fact_sales_order_line_sk ............................... [[31mERROR[0m in 0.10s]
+[0m22:15:09  26 of 61 START test not_null_fact_sales_unit_price ............................. [RUN]
+[0m22:15:09  23 of 61 ERROR not_null_fact_sales_product_sk .................................. [[31mERROR[0m in 0.12s]
+[0m22:15:09  27 of 61 START test not_null_stg_customers_cohort .............................. [RUN]
+[0m22:15:09  24 of 61 ERROR not_null_fact_sales_profit_margin_pct ........................... [[31mERROR[0m in 0.12s]
+[0m22:15:09  28 of 61 START test not_null_stg_customers_customer_id ......................... [RUN]
+[0m22:15:10  25 of 61 ERROR not_null_fact_sales_quantity .................................... [[31mERROR[0m in 0.12s]
+[0m22:15:10  26 of 61 ERROR not_null_fact_sales_unit_price .................................. [[31mERROR[0m in 0.10s]
+[0m22:15:10  29 of 61 START test not_null_stg_customers_customer_sk ......................... [RUN]
+[0m22:15:10  30 of 61 START test not_null_stg_customers_email ............................... [RUN]
+[0m22:15:10  27 of 61 PASS not_null_stg_customers_cohort .................................... [[32mPASS[0m in 0.12s]
+[0m22:15:10  28 of 61 PASS not_null_stg_customers_customer_id ............................... [[32mPASS[0m in 0.10s]
+[0m22:15:10  31 of 61 START test not_null_stg_products_list_price ........................... [RUN]
+[0m22:15:10  32 of 61 START test not_null_stg_products_product_id ........................... [RUN]
+[0m22:15:10  29 of 61 PASS not_null_stg_customers_customer_sk ............................... [[32mPASS[0m in 0.11s]
+[0m22:15:10  30 of 61 PASS not_null_stg_customers_email ..................................... [[32mPASS[0m in 0.10s]
+[0m22:15:10  33 of 61 START test not_null_stg_products_product_name ......................... [RUN]
+[0m22:15:10  34 of 61 START test not_null_stg_products_product_sk ........................... [RUN]
+[0m22:15:10  31 of 61 PASS not_null_stg_products_list_price ................................. [[32mPASS[0m in 0.09s]
+[0m22:15:10  32 of 61 PASS not_null_stg_products_product_id ................................. [[32mPASS[0m in 0.09s]
+[0m22:15:10  35 of 61 START test not_null_stg_sales_order_id ................................ [RUN]
+[0m22:15:10  36 of 61 START test not_null_stg_sales_order_line_sk ........................... [RUN]
+[0m22:15:10  33 of 61 PASS not_null_stg_products_product_name ............................... [[32mPASS[0m in 0.11s]
+[0m22:15:10  34 of 61 PASS not_null_stg_products_product_sk ................................. [[32mPASS[0m in 0.11s]
+[0m22:15:10  37 of 61 START test not_null_stg_sales_quantity ................................ [RUN]
+[0m22:15:10  38 of 61 START test not_null_stg_sales_unit_price .............................. [RUN]
+[0m22:15:10  35 of 61 PASS not_null_stg_sales_order_id ...................................... [[32mPASS[0m in 0.13s]
+[0m22:15:10  39 of 61 START test relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_  [RUN]
+[0m22:15:10  36 of 61 PASS not_null_stg_sales_order_line_sk ................................. [[32mPASS[0m in 0.20s]
+[0m22:15:10  40 of 61 START test relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_  [RUN]
+[0m22:15:10  37 of 61 PASS not_null_stg_sales_quantity ...................................... [[32mPASS[0m in 0.14s]
+[0m22:15:10  41 of 61 START test relationships_fact_sales_product_sk__product_sk__ref_dim_product_  [RUN]
+[0m22:15:10  38 of 61 PASS not_null_stg_sales_unit_price .................................... [[32mPASS[0m in 0.20s]
+[0m22:15:10  42 of 61 START test relationships_stg_sales_customer_id__customer_id__ref_stg_customers_  [RUN]
+[0m22:15:10  39 of 61 ERROR relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_  [[31mERROR[0m in 0.18s]
+[0m22:15:10  43 of 61 START test relationships_stg_sales_product_id__product_id__ref_stg_products_  [RUN]
+[0m22:15:10  40 of 61 ERROR relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_ .. [[31mERROR[0m in 0.17s]
+[0m22:15:10  44 of 61 START test test_customer_scd2_validity ................................ [RUN]
+[0m22:15:10  41 of 61 ERROR relationships_fact_sales_product_sk__product_sk__ref_dim_product_  [[31mERROR[0m in 0.16s]
+[0m22:15:10  45 of 61 START test test_daily_sales_positive .................................. [RUN]
+[0m22:15:10  42 of 61 PASS relationships_stg_sales_customer_id__customer_id__ref_stg_customers_  [[32mPASS[0m in 0.17s]
+[0m22:15:10  46 of 61 START test test_data_freshness ........................................ [RUN]
+[0m22:15:10  43 of 61 PASS relationships_stg_sales_product_id__product_id__ref_stg_products_  [[32mPASS[0m in 0.14s]
+[0m22:15:10  47 of 61 START test test_dimensional_completeness .............................. [RUN]
+[0m22:15:10  44 of 61 PASS test_customer_scd2_validity ...................................... [[32mPASS[0m in 0.11s]
+[0m22:15:10  48 of 61 START test test_no_null_customer_sk_in_fact ........................... [RUN]
+[0m22:15:10  45 of 61 ERROR test_daily_sales_positive ....................................... [[31mERROR[0m in 0.11s]
+[0m22:15:10  49 of 61 START test test_profit_margin_range ................................... [RUN]
+[0m22:15:10  46 of 61 WARN 2 test_data_freshness ............................................ [[33mWARN 2[0m in 0.09s]
+[0m22:15:10  50 of 61 START test unique_dim_customer_customer_id ............................ [RUN]
+[0m22:15:10  47 of 61 ERROR test_dimensional_completeness ................................... [[31mERROR[0m in 0.12s]
+[0m22:15:10  51 of 61 START test unique_dim_customer_customer_sk ............................ [RUN]
+[0m22:15:10  48 of 61 ERROR test_no_null_customer_sk_in_fact ................................ [[31mERROR[0m in 0.11s]
+[0m22:15:10  52 of 61 START test unique_dim_date_date_actual ................................ [RUN]
+[0m22:15:10  49 of 61 ERROR test_profit_margin_range ........................................ [[31mERROR[0m in 0.11s]
+[0m22:15:10  53 of 61 START test unique_dim_date_date_sk .................................... [RUN]
+[0m22:15:10  50 of 61 ERROR unique_dim_customer_customer_id ................................. [[31mERROR[0m in 0.14s]
+[0m22:15:10  54 of 61 START test unique_dim_product_product_id .............................. [RUN]
+[0m22:15:10  51 of 61 ERROR unique_dim_customer_customer_sk ................................. [[31mERROR[0m in 0.13s]
+[0m22:15:10  55 of 61 START test unique_dim_product_product_sk .............................. [RUN]
+[0m22:15:10  52 of 61 ERROR unique_dim_date_date_actual ..................................... [[31mERROR[0m in 0.12s]
+[0m22:15:11  56 of 61 START test unique_fact_sales_order_line_sk ............................ [RUN]
+[0m22:15:11  53 of 61 ERROR unique_dim_date_date_sk ......................................... [[31mERROR[0m in 0.13s]
+[0m22:15:11  57 of 61 START test unique_stg_customers_customer_id ........................... [RUN]
+[0m22:15:11  54 of 61 ERROR unique_dim_product_product_id ................................... [[31mERROR[0m in 0.13s]
+[0m22:15:11  58 of 61 START test unique_stg_customers_customer_sk ........................... [RUN]
+[0m22:15:11  55 of 61 ERROR unique_dim_product_product_sk ................................... [[31mERROR[0m in 0.13s]
+[0m22:15:11  59 of 61 START test unique_stg_products_product_id ............................. [RUN]
+[0m22:15:11  56 of 61 ERROR unique_fact_sales_order_line_sk ................................. [[31mERROR[0m in 0.13s]
+[0m22:15:11  57 of 61 PASS unique_stg_customers_customer_id ................................. [[32mPASS[0m in 0.11s]
+[0m22:15:11  60 of 61 START test unique_stg_products_product_sk ............................. [RUN]
+[0m22:15:11  61 of 61 START test unique_stg_sales_order_line_sk ............................. [RUN]
+[0m22:15:11  58 of 61 PASS unique_stg_customers_customer_sk ................................. [[32mPASS[0m in 0.12s]
+[0m22:15:11  59 of 61 PASS unique_stg_products_product_id ................................... [[32mPASS[0m in 0.10s]
+[0m22:15:11  60 of 61 PASS unique_stg_products_product_sk ................................... [[32mPASS[0m in 0.07s]
+[0m22:15:11  61 of 61 FAIL 5 unique_stg_sales_order_line_sk ................................. [[31mFAIL 5[0m in 0.27s]
+[0m22:15:11  
+[0m22:15:11  Finished running 61 data tests in 0 hours 0 minutes and 2.70 seconds (2.70s).
+[0m22:15:11  
+[0m22:15:11  [31mCompleted with 40 errors, 0 partial successes, and 1 warning:[0m
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test accepted_values_fact_sales_channel__Online__Retail__Catalog__B2B (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 21:     from "sales_analytics"."main_gold"."fact_sales"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/accepted_values_fact_sales_563084b20b22f40a1706e09e698bcef7.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10 (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test accepted_values_fact_sales_quantity__1__2__3__4__5__6__7__8__9__10 (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 21:     from "sales_analytics"."main_gold"."fact_sales"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/accepted_values_fact_sales_0ff3c882ca19578842715375ddbe96ba.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test accepted_values_fact_sales_is_bad_data_record__0__1 (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test accepted_values_fact_sales_is_bad_data_record__0__1 (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 21:     from "sales_analytics"."main_gold"."fact_sales"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/accepted_values_fact_sales_is_bad_data_record__0__1.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test accepted_values_dim_customer_income_bracket__LOW__MEDIUM__HIGH__VERY_HIGH (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 21:     from "sales_analytics"."main_gold"."dim_customer"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/accepted_values_dim_customer_b31185c01acd8fda87c41fba8d4c8bec.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_customer_customer_id (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_customer_customer_id (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_customer"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_customer_customer_id.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_customer_cohort (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_customer_cohort (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_customer"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_customer_cohort.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_customer_customer_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_customer_customer_sk (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_customer"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_customer_customer_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_customer_email (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_customer_email (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_customer"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_customer_email.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_date_date_actual (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_date_date_actual (models/marts/schema.yml)
+  Catalog Error: Table with name dim_date does not exist!
+  Did you mean "main.duckdb_databases"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_date"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_date_date_actual.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_date_date_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_date_date_sk (models/marts/schema.yml)
+  Catalog Error: Table with name dim_date does not exist!
+  Did you mean "main.duckdb_databases"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_date"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_date_date_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_date_year (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_date_year (models/marts/schema.yml)
+  Catalog Error: Table with name dim_date does not exist!
+  Did you mean "main.duckdb_databases"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_date"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_date_year.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_product_list_price (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_product_list_price (models/marts/schema.yml)
+  Catalog Error: Table with name dim_product does not exist!
+  Did you mean "main_silver.stg_products"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_product"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_product_list_price.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_product_product_id (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_product_product_id (models/marts/schema.yml)
+  Catalog Error: Table with name dim_product does not exist!
+  Did you mean "main_silver.stg_products"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_product"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_product_product_id.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_product_product_name (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_product_product_name (models/marts/schema.yml)
+  Catalog Error: Table with name dim_product does not exist!
+  Did you mean "main_silver.stg_products"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_product"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_product_product_name.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_dim_product_product_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_dim_product_product_sk (models/marts/schema.yml)
+  Catalog Error: Table with name dim_product does not exist!
+  Did you mean "main_silver.stg_products"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."dim_product"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_dim_product_product_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_channel (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_channel (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_channel.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_customer_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_customer_sk (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_customer_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_net_revenue (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_net_revenue (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_net_revenue.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_order_date_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_order_date_sk (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_order_date_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_order_id (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_order_id (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_order_id.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_order_line_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_order_line_sk (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_order_line_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_product_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_product_sk (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_product_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_profit_margin_pct (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_profit_margin_pct (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_profit_margin_pct.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_quantity (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_quantity (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_quantity.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test not_null_fact_sales_unit_price (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test not_null_fact_sales_unit_price (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/not_null_fact_sales_unit_price.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_ (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test relationships_fact_sales_customer_sk__customer_sk__ref_dim_customer_ (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 17:     from "sales_analytics"."main_gold"."fact_sales"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/relationships_fact_sales_9a20190bb5052365ce2b408ee856132e.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_ (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_ (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 17:     from "sales_analytics"."main_gold"."fact_sales"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/relationships_fact_sales_order_date_sk__date_sk__ref_dim_date_.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test relationships_fact_sales_product_sk__product_sk__ref_dim_product_ (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test relationships_fact_sales_product_sk__product_sk__ref_dim_product_ (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 17:     from "sales_analytics"."main_gold"."fact_sales"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/relationships_fact_sales_6d8dd808933991ccfb16c3d414573950.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test test_daily_sales_positive (tests/test_daily_sales_positive.sql)
+[0m22:15:11    Runtime Error in test test_daily_sales_positive (tests/test_daily_sales_positive.sql)
+  Catalog Error: Table with name dim_date does not exist!
+  Did you mean "main.duckdb_databases"?
+  
+  LINE 17:     from "sales_analytics"."main_gold"."dim_date"
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/tests/test_daily_sales_positive.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test test_dimensional_completeness (tests/test_dimensional_completeness.sql)
+[0m22:15:11    Runtime Error in test test_dimensional_completeness (tests/test_dimensional_completeness.sql)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 17:     from "sales_analytics"."main_gold"."fact_sales" fact
+                    ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/tests/test_dimensional_completeness.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test test_no_null_customer_sk_in_fact (tests/test_no_null_customer_sk_in_fact.sql)
+[0m22:15:11    Runtime Error in test test_no_null_customer_sk_in_fact (tests/test_no_null_customer_sk_in_fact.sql)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 18: from "sales_analytics"."main_gold"."fact_sales" fact
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/tests/test_no_null_customer_sk_in_fact.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test test_profit_margin_range (tests/test_profit_margin_range.sql)
+[0m22:15:11    Runtime Error in test test_profit_margin_range (tests/test_profit_margin_range.sql)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/tests/test_profit_margin_range.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_dim_customer_customer_id (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_dim_customer_customer_id (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."dim_customer"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_dim_customer_customer_id.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_dim_customer_customer_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_dim_customer_customer_sk (models/marts/schema.yml)
+  Catalog Error: Table with name dim_customer does not exist!
+  Did you mean "bronze.raw_customers or main_silver.stg_customers"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."dim_customer"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_dim_customer_customer_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_dim_date_date_actual (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_dim_date_date_actual (models/marts/schema.yml)
+  Catalog Error: Table with name dim_date does not exist!
+  Did you mean "main.duckdb_databases"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."dim_date"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_dim_date_date_actual.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_dim_date_date_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_dim_date_date_sk (models/marts/schema.yml)
+  Catalog Error: Table with name dim_date does not exist!
+  Did you mean "main.duckdb_databases"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."dim_date"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_dim_date_date_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_dim_product_product_id (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_dim_product_product_id (models/marts/schema.yml)
+  Catalog Error: Table with name dim_product does not exist!
+  Did you mean "main_silver.stg_products"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."dim_product"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_dim_product_product_id.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_dim_product_product_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_dim_product_product_sk (models/marts/schema.yml)
+  Catalog Error: Table with name dim_product does not exist!
+  Did you mean "main_silver.stg_products"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."dim_product"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_dim_product_product_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_fact_sales_order_line_sk (models/marts/schema.yml)
+[0m22:15:11    Runtime Error in test unique_fact_sales_order_line_sk (models/marts/schema.yml)
+  Catalog Error: Table with name fact_sales does not exist!
+  Did you mean "bronze.raw_sales"?
+  
+  LINE 19: from "sales_analytics"."main_gold"."fact_sales"
+                ^
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/marts/schema.yml/unique_fact_sales_order_line_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[31mERROR[0m]: in test unique_stg_sales_order_line_sk (models/staging/schema.yml)
+[0m22:15:11    Got 5 results, configured to fail if != 0
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/models/staging/schema.yml/unique_stg_sales_order_line_sk.sql
+[0m22:15:11  
+[0m22:15:11  [[33mWARNING[0m]: in test test_data_freshness (tests/test_data_freshness.sql)
+[0m22:15:11  [[33mWARNING[0m]: Got 2 results, configured to warn if != 0
+[0m22:15:11  
+[0m22:15:11    compiled code at target/compiled/sales_analytics/tests/test_data_freshness.sql
+[0m22:15:11  
+[0m22:15:11  Done. PASS=20 WARN=1 ERROR=40 SKIP=0 NO-OP=0 REUSED=0 TOTAL=61
+EXIT_CODE: 1

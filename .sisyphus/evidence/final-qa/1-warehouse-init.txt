@@ -1,0 +1,5 @@
+100% ▕██████████████████████████████████████▏ (00:00:02.61 elapsed)     
+raw_customers: 10000
+raw_products: 80
+raw_sales: 782059
+Done in 3.27s

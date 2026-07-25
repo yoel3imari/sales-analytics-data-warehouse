@@ -1,0 +1,6 @@
+=== Star Schema Row Counts ===
+  dim_customer: 10,000 rows
+  dim_product: 80 rows
+  dim_date: 1,826 rows
+  fact_sales: 782,055 rows
+  obt_sales: 782,055 rows

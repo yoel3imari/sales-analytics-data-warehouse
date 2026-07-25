@@ -1,0 +1,28 @@
+=== SCENARIO 1: Data Generator Output ===
+   10001 data/raw/raw_customers.csv
+      81 data/raw/raw_products.csv
+  782060 data/raw/raw_sales.csv
+  792142 total
+--- Bad Data Check ---
+customer_id,first_name,last_name,email,phone,address_line1,address_line2,city,state,postal_code,country,birth_date,gender,income_bracket,cohort,signup_date,last_update_date
+CUST-00001,Jessica,Thompson,jessica.thompson@example.com,+1-392-592-4698x33394,920 Lucero Burgs,Suite 986,South Theresa,PR,33805,USA,1997-07-17,F,LOW,LOYAL_HEAVY,2024-09-21,2024-09-21
+CUST-00002,Carol,Morris,carol.morris@example.com,3472149849,4486 Alexis Flats,,Lake Mitchellchester,PW,02436,USA,1992-11-04,F,VERY_HIGH,LOYAL_HEAVY,2025-02-08,2025-02-08
+CUST-00003,Jeremy,Morton,jeremy.morton@example.com,797.367.0006,3770 Arellano Falls Suite 201,,South Tiffany,ME,50589,USA,1950-04-16,M,LOW,LOYAL_HEAVY,2022-01-08,2022-01-08
+CUST-00004,Linda,Henson,linda.henson@example.com,365.512.8192x23419,175 Julian Fords,,Harthaven,NY,84483,USA,1965-04-03,F,LOW,ONE_SHOT,2022-12-15,2022-12-15
+---
+product_id,product_name,category,subcategory,brand,list_price,standard_cost,color,size,weight_kg,launch_date,discontinued_date
+PROD-00001,TechPro Smartphone X1,Electronics,Smartphones,TechPro,962.33,632.81,Teal,N/A,0.22,2023-08-09,
+PROD-00002,MegaGadget Galaxy S24,Electronics,Smartphones,MegaGadget,1055.68,671.22,White,N/A,0.17,2025-07-09,
+PROD-00003,ElectroWave Bolt Pro,Electronics,Smartphones,ElectroWave,962.38,570.84,Beige,N/A,0.21,2024-08-20,
+PROD-00004,DigiLife Pixel 9,Electronics,Smartphones,DigiLife,898.56,376.63,Navy,N/A,0.24,2023-10-31,
+---
+order_id,line_item_id,order_date,customer_id,product_id,quantity,unit_price,discount_amount,ship_date,ship_city,ship_state,ship_country,channel
+ORD-00000001,1,2023-01-22,CUST-00040,PROD-00023,1,43.19,-1.95,2023-01-28,Westton,ND,USA,Online
+ORD-00000001,2,2023-01-22,CUST-00040,PROD-00023,1,41.77,-0.53,2023-01-28,Westton,ND,USA,Online
+---
+Looking for bad data in sales CSV (null customer_id, negative quantity):
+Null customer_id: 1
+Negative quantity: 1
+Zero unit_price: 1
+Duplicate order+line pairs: 5
+Unique order+line pairs: 782054
