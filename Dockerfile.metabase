@@ -1,0 +1,30 @@
+FROM eclipse-temurin:21-jre
+
+LABEL description="Metabase with DuckDB JDBC driver for Sales Analytics"
+
+ENV MB_PLUGINS_DIR=/app/plugins
+ENV MB_DB_TYPE=h2
+ENV MB_DB_FILE=/data/metabase/metabase.db
+
+# Install curl for healthcheck
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Create directories
+RUN mkdir -p /app/plugins /data/metabase /data/warehouse
+
+# Download Metabase
+RUN curl -L -o /app/metabase.jar \
+    https://downloads.metabase.com/v0.53.7/metabase.jar
+
+# Download DuckDB JDBC driver
+RUN curl -L -o /app/plugins/duckdb_jdbc.jar \
+    https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/1.2.1/duckdb_jdbc-1.2.1.jar
+
+WORKDIR /app
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 \
+    CMD curl -f http://localhost:3000/api/health || exit 1
+
+EXPOSE 3000
+
+CMD ["java", "-jar", "metabase.jar"]

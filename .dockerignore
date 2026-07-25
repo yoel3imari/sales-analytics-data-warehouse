@@ -1,0 +1,11 @@
+.git
+__pycache__
+*.pyc
+.venv
+.uv
+data/
+.dockerignore
+.env
+*.md
+.sisyphus/
+tests/

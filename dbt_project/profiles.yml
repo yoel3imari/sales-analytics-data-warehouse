@@ -1,0 +1,12 @@
+sales_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: /data/warehouse/sales_analytics.duckdb
+      threads: 4
+      extensions:
+        - parquet
+      # Optional settings
+      settings:
+        temp_directory: /tmp/duckdb_tmp

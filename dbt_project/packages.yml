@@ -1,0 +1,2 @@
+# No external dbt packages needed for this project
+# All tests use built-in dbt functionality

@@ -1,0 +1,48 @@
+name: 'sales_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'sales_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
+
+models:
+  sales_analytics:
+    staging:
+      +materialized: view
+      +schema: silver
+    intermediate:
+      +materialized: ephemeral
+      +schema: silver
+    marts:
+      +materialized: table
+      +schema: gold
+      dims:
+        +materialized: table
+      facts:
+        +materialized: incremental
+      analytics:
+        +materialized: table
+
+snapshots:
+  sales_analytics:
+    +target_schema: snapshots
+    +strategy: check
+    +unique_key: null  # override per snapshot
+
+seeds:
+  sales_analytics:
+    +schema: bronze
+
+tests:
+  +severity: error
