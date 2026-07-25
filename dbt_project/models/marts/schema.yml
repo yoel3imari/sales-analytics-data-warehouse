@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer dimension with SCD Type 1 attributes and enriched metrics"
+    columns:
+      - name: customer_sk
+        description: "Surrogate key"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Natural key"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        tests:
+          - not_null
+      - name: cohort
+        tests:
+          - not_null
+
+  - name: dim_product
+    description: "Product dimension with category hierarchy and enriched metrics"
+    columns:
+      - name: product_sk
+        description: "Surrogate key"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Natural key"
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        tests:
+          - not_null
+      - name: list_price
+        tests:
+          - not_null
+
+  - name: dim_date
+    description: "Date dimension with attributes for time-based analysis"
+    columns:
+      - name: date_sk
+        description: "Integer key in YYYYMMDD format"
+        tests:
+          - unique
+          - not_null
+      - name: date_actual
+        tests:
+          - unique
+          - not_null
+      - name: year
+        tests:
+          - not_null
+
+  - name: fact_sales
+    description: "Sales fact table with measures and foreign keys to dimensions"
+    columns:
+      - name: order_line_sk
+        description: "Composite key (order_id + line_item_id)"
+        tests:
+          - unique
+          - not_null
+      - name: customer_sk
+        description: "Foreign key to dim_customer"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+      - name: product_sk
+        description: "Foreign key to dim_product"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_sk
+      - name: order_date_sk
+        description: "Foreign key to dim_date (order date)"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+      - name: order_id
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
+      - name: unit_price
+        tests:
+          - not_null
+      - name: net_revenue
+        tests:
+          - not_null
+      - name: is_bad_data_record
+        description: "Flag indicating if this record has data quality issues"
+        tests:
+          - accepted_values:
+              values: [0, 1]
