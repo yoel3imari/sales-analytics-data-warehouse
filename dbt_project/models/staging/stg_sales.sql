@@ -1,7 +1,8 @@
 {#
-Staging model for raw sales data.
-Standardizes column names, flags bad data records.
-Bad data is FLAGGED but NOT FILTERED — quality tests will catch them.
+Staging model for clean sales data.
+Standardizes column names, filters out bad data records (is_bad_data_record = 0),
+and deduplicates order line combinations.
+Bad data and duplicate records are routed to stg_sales_rejected.
 #}
 
 with source as (
@@ -45,6 +46,8 @@ renamed as (
         -- Bad data flags
         case when customer_id is null or trim(cast(customer_id as varchar)) = ''
             then 1 else 0 end as is_null_customer,
+        case when order_id is null or trim(cast(order_id as varchar)) = '' or line_item_id is null
+            then 1 else 0 end as is_null_order_key,
         case when try_cast(quantity as integer) < 0
             then 1 else 0 end as is_negative_quantity,
         case when try_cast(order_date as date) > current_date
@@ -54,6 +57,7 @@ renamed as (
 
         -- Composite bad data flag
         case when customer_id is null or trim(cast(customer_id as varchar)) = ''
+               or order_id is null or trim(cast(order_id as varchar)) = '' or line_item_id is null
                or try_cast(quantity as integer) < 0
                or try_cast(order_date as date) > current_date
                or try_cast(unit_price as decimal(10,2)) <= 0
@@ -65,3 +69,5 @@ renamed as (
 )
 
 select * from renamed
+where is_bad_data_record = 0
+qualify row_number() over (partition by order_id, line_item_id order by order_date desc) = 1

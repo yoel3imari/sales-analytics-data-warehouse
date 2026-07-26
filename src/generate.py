@@ -20,9 +20,9 @@ import pandas as pd
 
 from src.config import (
     CUSTOMER_COLUMNS,
+    PRODUCT_COLUMNS,
     NUM_CUSTOMERS,
     NUM_PRODUCTS,
-    PRODUCT_COLUMNS,
     RANDOM_SEED,
     RAW_CUSTOMERS,
     RAW_DATA_DIR,

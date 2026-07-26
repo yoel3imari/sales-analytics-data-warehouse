@@ -1,2 +1,3 @@
-# No external dbt packages needed for this project
-# All tests use built-in dbt functionality
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.3.0

@@ -33,15 +33,15 @@ check_prereqs() {
 case "${1:-help}" in
     generate)
         info "Generating synthetic data..."
-        check_prereqs uv python
-        uv run python -m src.generate
+        check_prereqs uv python3
+        uv run python3 -m src.generate
         ok "Synthetic data generated → data/raw/"
         ;;
 
     init)
         info "Initializing DuckDB warehouse from CSVs..."
-        check_prereqs uv python
-        uv run python -m src.init_warehouse
+        check_prereqs uv python3
+        uv run python3 -m src.init_warehouse
         ok "Warehouse initialized → data/warehouse/sales.duckdb"
         ;;
 
@@ -56,28 +56,37 @@ case "${1:-help}" in
     dag)
         info "Triggering Airflow DAG..."
         check_prereqs docker
+        docker compose exec airflow-webserver airflow dags unpause sales_analytics_pipeline 2>/dev/null || true
         docker compose exec airflow-webserver airflow dags trigger sales_analytics_pipeline
         ok "DAG 'sales_analytics_pipeline' triggered"
         ;;
 
     build)
         info "Running full dbt build..."
-        check_prereqs docker
-        docker compose exec airflow-webserver bash -c "cd /opt/airflow/dbt_project && dbt build --profiles-dir ."
+        if command -v uv &>/dev/null; then
+            (cd dbt_project && uv run dbt build --profiles-dir .)
+        else
+            check_prereqs docker
+            docker compose run --rm dbt-runner dbt build --profiles-dir .
+        fi
         ok "dbt build complete"
         ;;
 
     test)
         info "Running dbt tests..."
-        check_prereqs docker
-        docker compose exec airflow-webserver bash -c "cd /opt/airflow/dbt_project && dbt test --profiles-dir ."
+        if command -v uv &>/dev/null; then
+            (cd dbt_project && uv run dbt test --profiles-dir .)
+        else
+            check_prereqs docker
+            docker compose run --rm dbt-runner dbt test --profiles-dir .
+        fi
         ok "dbt tests passed"
         ;;
 
     setup)
         info "Running Metabase setup..."
-        check_prereqs uv python
-        uv run python metabase/setup.py
+        check_prereqs uv python3
+        uv run python3 metabase/setup.py
         ok "Metabase configured"
         ;;
 

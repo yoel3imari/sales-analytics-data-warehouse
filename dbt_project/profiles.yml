@@ -3,10 +3,14 @@ sales_analytics:
   outputs:
     dev:
       type: duckdb
-      path: /data/warehouse/sales_analytics.duckdb
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse/sales_analytics.duckdb') }}"
       threads: 4
       extensions:
         - parquet
-      # Optional settings
       settings:
         temp_directory: /tmp/duckdb_tmp
+
+    motherduck:
+      type: duckdb
+      path: "md:sales_analytics?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      threads: 4

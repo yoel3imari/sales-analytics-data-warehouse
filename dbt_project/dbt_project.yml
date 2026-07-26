@@ -27,22 +27,11 @@ models:
     marts:
       +materialized: table
       +schema: gold
-      dims:
-        +materialized: table
-      facts:
-        +materialized: incremental
-      analytics:
-        +materialized: table
 
 snapshots:
   sales_analytics:
     +target_schema: snapshots
     +strategy: check
-    +unique_key: null  # override per snapshot
-
-seeds:
-  sales_analytics:
-    +schema: bronze
 
 tests:
   +severity: error

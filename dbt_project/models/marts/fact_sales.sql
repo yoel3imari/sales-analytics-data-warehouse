@@ -2,6 +2,8 @@
 Fact: Sales transactions.
 Incremental model with measures and foreign keys to dimensions.
 Unique key: order_line_sk (composite of order_id + line_item_id).
+
+Note: Bad data records (is_bad_data_record = 1) are filtered out upstream in stg_sales.sql.
 #}
 
 {{ config(
@@ -81,8 +83,6 @@ joined as (
     left join dim_product dp on od.product_id = dp.product_id
     left join dim_date dd_order on od.order_date = dd_order.date_actual
     left join dim_date dd_ship on od.ship_date = dd_ship.date_actual
-
-    where od.is_bad_data_record = 0
 )
 
 select * from joined

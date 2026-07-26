@@ -68,7 +68,8 @@ sales-analytics/
 │       ├── product_performance.json
 │       └── customer_analysis.json
 ├── src/
-│   ├── generate.py                    # CLI entry point
+│   ├── generate.py                    # CLI entry point (data generation)
+│   ├── init_warehouse.py              # CLI entry point (warehouse init)
 │   ├── config.py                      # Shared constants
 │   └── data/
 │       ├── cohorts.py                 # 6 customer behavior cohorts
@@ -158,21 +159,15 @@ All dbt commands run in the `sales-analytics-dbt-runner` Docker container via Ai
 ```bash
 ./start.sh generate
 # Or directly:
-uv run python -m src.generate --seed 42
+uv run python3 -m src.generate --seed 42
 ```
 
 ### 2. Initialize Warehouse
 
 ```bash
-# Without Docker (for testing):
-uv run python -c "
-import duckdb
-conn = duckdb.connect('data/warehouse/sales_analytics.duckdb')
-exec(open('airflow/sql/init_warehouse.sql').read())
-"
-
-# Or via the shell script:
-bash airflow/sql/init_warehouse.sh
+./start.sh init
+# Or directly:
+uv run python3 -m src.init_warehouse
 ```
 
 ### 3. Run dbt
