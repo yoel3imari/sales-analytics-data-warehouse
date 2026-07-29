@@ -110,7 +110,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ["Online", "Retail", "Catalog", "B2B"]
+              values: ["Online", "Retail", "Catalog", "B2B", "POS_Retail", "Online_Realtime"]
       - name: profit_margin_pct
         description: "Profit margin percentage"
         tests:

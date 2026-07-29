@@ -69,8 +69,13 @@ joined as (
         od.ship_state,
         od.ship_country,
 
-        -- Channel
+        -- Channel & POS Store details
         od.channel,
+        od.store_id,
+        od.store_name,
+        od.pos_terminal_id,
+        od.payment_method,
+        od.is_streaming,
 
         -- Bad data flag
         od.is_bad_data_record,

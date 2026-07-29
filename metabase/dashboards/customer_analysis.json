@@ -1,64 +1,138 @@
 {
     "name": "Customer Analysis",
-    "description": "Customer segmentation, acquisition, and behavior analysis",
+    "description": "Analysis of customer cohorts, value segments, and lifetime value",
+    "parameters": [
+        {
+            "id": "date_range",
+            "name": "Date Range",
+            "slug": "date_range",
+            "type": "date/all-options",
+            "sectionId": "date",
+            "default": "past30days"
+        }
+    ],
     "cards": [
         {
-            "name": "Customer Segment Breakdown",
-            "display": "pie",
+            "name": "Customer Segmentation",
+            "display": "text",
             "row": 0,
             "col": 0,
-            "size_x": 8,
-            "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["count", []]],
-                    "breakout": [["field", "value_segment", null]]
-                }
-            }
+            "size_x": 24,
+            "size_y": 1,
+            "text_content": "## Customer Segmentation"
         },
         {
-            "name": "Revenue per Customer",
+            "name": "Revenue by Customer Cohort",
             "display": "bar",
-            "row": 0,
-            "col": 8,
-            "size_x": 8,
-            "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["sum", ["field", "net_revenue", null]]],
-                    "breakout": [["field", "customer_id", null]],
-                    "order-by": [["desc", ["aggregation", 0]]],
-                    "limit": 20
-                }
-            }
-        },
-        {
-            "name": "Customer Acquisition Over Time",
-            "display": "line",
-            "row": 6,
+            "row": 1,
             "col": 0,
-            "size_x": 8,
+            "size_x": 12,
             "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["count", []]],
-                    "breakout": [["field", "signup_date", {"source-field": "customer_sk"}]]
+            "native_query": "SELECT cohort AS \"Cohort\", ROUND(SUM(net_revenue), 2) AS \"Revenue\" FROM main_gold.obt_sales WHERE cohort IS NOT NULL [[AND {{date_range}}]] GROUP BY 1 ORDER BY 1",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
                 }
-            }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
         },
         {
-            "name": "Customer Geography Map",
-            "display": "map",
-            "row": 6,
-            "col": 8,
-            "size_x": 8,
+            "name": "Customer Value Segment Distribution",
+            "display": "bar",
+            "row": 1,
+            "col": 12,
+            "size_x": 12,
             "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["count", []]],
-                    "breakout": [["field", "customer_state", null]]
+            "native_query": "SELECT value_segment AS \"Value Segment\", COUNT(DISTINCT customer_id) AS \"Customer Count\" FROM main_gold.obt_sales WHERE value_segment IS NOT NULL [[AND {{date_range}}]] GROUP BY 1 ORDER BY 2 DESC",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
                 }
-            }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
+        },
+        {
+            "name": "Customer Detail",
+            "display": "text",
+            "row": 3,
+            "col": 0,
+            "size_x": 24,
+            "size_y": 1,
+            "text_content": "## Customer Detail"
+        },
+        {
+            "name": "Customer Recency vs Frequency",
+            "display": "table",
+            "row": 4,
+            "col": 0,
+            "size_x": 12,
+            "size_y": 6,
+            "native_query": "SELECT recency_segment AS \"Recency\", frequency_segment AS \"Frequency\", COUNT(DISTINCT customer_id) AS \"Customers\" FROM main_gold.obt_sales WHERE recency_segment IS NOT NULL [[AND {{date_range}}]] GROUP BY 1, 2 ORDER BY 3 DESC",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
+                }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
+        },
+        {
+            "name": "Top Customers by Lifetime Value",
+            "display": "table",
+            "row": 4,
+            "col": 12,
+            "size_x": 12,
+            "size_y": 6,
+            "native_query": "SELECT customer_id AS \"Customer ID\", first_name || ' ' || last_name AS \"Customer Name\", email AS \"Email\", ROUND(SUM(net_revenue), 2) AS \"Lifetime Value\" FROM main_gold.obt_sales WHERE 1=1 [[AND {{date_range}}]] GROUP BY 1, 2, 3 ORDER BY 4 DESC LIMIT 10",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
+                }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
         }
     ]
 }

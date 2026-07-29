@@ -37,3 +37,4 @@ metabase/plugins/
 
 # Environment
 .env
+dbt_project/logs

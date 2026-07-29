@@ -1,18 +1,66 @@
 {#
 Staging model for clean sales data.
+Unions static batch sales (raw_sales) and real-time streaming POS sales (raw_sales_stream).
 Standardizes column names, filters out bad data records (is_bad_data_record = 0),
 and deduplicates order line combinations.
-Bad data and duplicate records are routed to stg_sales_rejected.
 #}
 
-with source as (
-    select * from {{ source('raw', 'raw_sales') }}
+with source_batch as (
+    select
+        order_id,
+        line_item_id,
+        customer_id,
+        product_id,
+        order_date,
+        ship_date,
+        quantity,
+        unit_price,
+        discount_amount,
+        ship_city,
+        ship_state,
+        ship_country,
+        channel,
+        cast(null as varchar) as store_id,
+        cast(null as varchar) as store_name,
+        cast(null as varchar) as pos_terminal_id,
+        cast(null as varchar) as payment_method,
+        0 as is_streaming
+    from {{ source('raw', 'raw_sales') }}
+),
+
+source_stream as (
+    select
+        order_id,
+        line_item_id,
+        customer_id,
+        product_id,
+        order_date,
+        ship_date,
+        quantity,
+        unit_price,
+        discount_amount,
+        ship_city,
+        ship_state,
+        ship_country,
+        channel,
+        store_id,
+        store_name,
+        pos_terminal_id,
+        payment_method,
+        1 as is_streaming
+    from {{ source('raw', 'raw_sales_stream') }}
+),
+
+unomated as (
+    select * from source_batch
+    union all
+    select * from source_stream
 ),
 
 renamed as (
     select
         -- Business keys
-        trim(order_id) as order_id,
+        trim(cast(order_id as varchar)) as order_id,
         try_cast(line_item_id as integer) as line_item_id,
 
         -- Composite key for incremental fact (DuckDB built-in md5)
@@ -23,8 +71,8 @@ renamed as (
         ) as order_line_sk,
 
         -- Foreign keys
-        trim(customer_id) as customer_id,
-        trim(product_id) as product_id,
+        trim(cast(customer_id as varchar)) as customer_id,
+        trim(cast(product_id as varchar)) as product_id,
 
         -- Date fields
         try_cast(order_date as date) as order_date,
@@ -36,12 +84,17 @@ renamed as (
         try_cast(discount_amount as decimal(10,2)) as discount_amount,
 
         -- Geography
-        trim(ship_city) as ship_city,
-        upper(trim(ship_state)) as ship_state,
-        upper(trim(ship_country)) as ship_country,
+        trim(cast(ship_city as varchar)) as ship_city,
+        upper(trim(cast(ship_state as varchar))) as ship_state,
+        upper(trim(cast(ship_country as varchar))) as ship_country,
 
-        -- Channel
-        trim(channel) as channel,
+        -- Channel & POS Details
+        trim(cast(channel as varchar)) as channel,
+        trim(cast(store_id as varchar)) as store_id,
+        trim(cast(store_name as varchar)) as store_name,
+        trim(cast(pos_terminal_id as varchar)) as pos_terminal_id,
+        trim(cast(payment_method as varchar)) as payment_method,
+        is_streaming,
 
         -- Bad data flags
         case when customer_id is null or trim(cast(customer_id as varchar)) = ''
@@ -65,7 +118,7 @@ renamed as (
 
         -- Metadata
         current_timestamp as dbt_loaded_at
-    from source
+    from unomated
 )
 
 select * from renamed

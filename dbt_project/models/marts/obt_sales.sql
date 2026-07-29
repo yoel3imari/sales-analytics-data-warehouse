@@ -48,6 +48,11 @@ joined as (
         fact.net_profit,
         fact.profit_margin_pct,
         fact.channel,
+        fact.store_id,
+        fact.store_name,
+        fact.pos_terminal_id,
+        fact.payment_method,
+        fact.is_streaming,
 
         -- ── Customer attributes ──
         cust.customer_id,

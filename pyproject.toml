@@ -11,6 +11,8 @@ dependencies = [
     "faker>=22.0.0,<30.0.0",
     "numpy>=1.26.0,<2.0.0",
     "pandas>=2.1.0,<3.0.0",
+    "kafka-python-ng>=2.2.0",
+    "rich>=13.0.0",
 ]
 
 [project.optional-dependencies]

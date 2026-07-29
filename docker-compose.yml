@@ -1,5 +1,3 @@
-version: "3.8"
-
 x-airflow-common: &airflow-common
   image: apache/airflow:2.10.5
   environment: &airflow-common-env
@@ -79,27 +77,18 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
-  airflow-triggerer:
-    <<: *airflow-common
-    command: airflow triggerer
-    profiles:
-      - infra
-    depends_on:
-      airflow-init:
-        condition: service_completed_successfully
-
   dbt-runner:
     build:
       context: .
       dockerfile: Dockerfile
     image: sales-analytics-dbt-runner:latest
+    profiles:
+      - infra
     volumes:
       - warehouse-data:/data/warehouse
       - ./dbt_project:/dbt_project
     networks:
       - sales-analytics-net
-    profiles:
-      - infra
 
   metabase:
     build:
@@ -109,28 +98,78 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - warehouse-data:/data/warehouse
+      - ./data/warehouse:/data/warehouse
       - metabase-data:/data/metabase
     environment:
       MB_DB_TYPE: h2
       MB_DB_FILE: /data/metabase/metabase.db
       MB_PLUGINS_DIR: /app/plugins
+      MB_SITE_NAME: "Sales Analytics"
+      JAVA_OPTS: "-Xmx512m -XX:+CrashOnOutOfMemoryError"
       JAVA_TIMEZONE: America/New_York
+      MB_ENABLE_QUERY_CACHING: "true"
+      MB_QUERY_CACHING_TTL_RATIO: "10"
+      MB_ENCRYPTION_SECRET_KEY: sales-analytics-dev-key-change-in-prod
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
       interval: 30s
-      timeout: 10s
+      timeout: 5s
       retries: 5
+      start_period: 120s
     networks:
       - sales-analytics-net
     profiles:
       - infra
 
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v24.1.1
+    container_name: redpanda
+    command:
+      - redpanda
+      - start
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+      - --mode dev-container
+      - --smp 1
+      - --default-log-level=info
+    ports:
+      - "18081:18081"
+      - "18082:18082"
+      - "19092:19092"
+      - "9092:9092"
+    healthcheck:
+      test: ["CMD", "rpk", "cluster", "health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - redpanda-data:/var/lib/redpanda/data
+    networks:
+      - sales-analytics-net
+    profiles:
+      - streaming
+
+  redpanda-console:
+    image: docker.redpanda.com/redpandadata/console:v2.5.2
+    container_name: redpanda-console
+    environment:
+      KAFKA_BROKERS: "redpanda:9092"
+    ports:
+      - "8082:8080"
+    networks:
+      - sales-analytics-net
+    depends_on:
+      - redpanda
+    profiles:
+      - streaming
+
 volumes:
   postgres-data:
   warehouse-data:
   metabase-data:
+  redpanda-data:
 
 networks:
   sales-analytics-net:
     driver: bridge
+

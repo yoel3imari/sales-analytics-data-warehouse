@@ -6,7 +6,7 @@ Configures Metabase via REST API after container startup:
 1. Waits for Metabase to be healthy
 2. Creates admin user (if first-time setup)
 3. Sets up DuckDB database connection
-4. Creates 3 dashboards with cards
+4. Creates 3 dashboards with cards, filters, and parameter mappings
 
 Usage:
     python metabase/setup.py [--base-url URL] [--username USER] [--password PASS]
@@ -18,24 +18,24 @@ import logging
 import os
 import sys
 import time
+import uuid
 from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 logger = logging.getLogger("metabase_setup")
 
-# ── Defaults ──
 DEFAULT_BASE_URL = "http://localhost:3000"
 DEFAULT_USERNAME = "admin@example.com"
-DEFAULT_PASSWORD = "password"
+DEFAULT_PASSWORD = "SalesAnalytics2026!"
 DASHBOARD_DIR = Path(__file__).parent / "dashboards"
 
-# ── DuckDB connection details ──
 DUCKDB_CONNECTION = {
     "engine": "duckdb",
     "name": "Sales Analytics Warehouse",
     "details": {
-        "db": "/data/warehouse/sales_analytics.duckdb",
+        "database_file": "/data/warehouse/sales_analytics.duckdb",
+        "read_only": True,
     },
 }
 
@@ -58,7 +58,6 @@ def api_request(method, url, session_id=None, data=None):
 
 
 def wait_for_metabase(base_url, timeout=120):
-    """Wait for Metabase to become healthy."""
     logger.info("Waiting for Metabase at %s ...", base_url)
     start = time.time()
     while time.time() - start < timeout:
@@ -102,22 +101,20 @@ def setup_admin(base_url, username, password):
         if resp:
             logger.info("Admin user created.")
             return resp.get("id")
-        return None
-    else:
-        # Already set up — log in
-        logger.info("Metabase already configured — logging in.")
-        login_data = {"username": username, "password": password}
-        resp = api_request("POST", f"{base_url}/api/session", data=login_data)
-        if resp:
-            logger.info("Logged in as %s", username)
-            return resp.get("id")
-        return None
+        logger.info("Setup endpoint did not return session, attempting login...")
+
+    logger.info("Logging into Metabase...")
+    login_data = {"username": username, "password": password}
+    resp = api_request("POST", f"{base_url}/api/session", data=login_data)
+    if resp:
+        logger.info("Logged in as %s", username)
+        return resp.get("id")
+    return None
 
 
 def add_database_connection(base_url, session_id):
     """Add DuckDB database connection."""
     logger.info("Adding DuckDB database connection...")
-    # Check if database already exists
     databases = api_request("GET", f"{base_url}/api/database", session_id)
     if databases:
         for db in databases.get("data", []):
@@ -137,27 +134,27 @@ def add_database_connection(base_url, session_id):
 
 
 def sync_database(base_url, session_id, db_id):
-    """Trigger schema sync for a database."""
     logger.info("Syncing database schema...")
     resp = api_request(
         "POST",
         f"{base_url}/api/database/{db_id}/sync",
         session_id,
     )
-    if resp is not None or True:  # 204 No Content is success
+    if resp is not None or True:
         logger.info("Sync triggered for database %s.", db_id)
-        # Wait a bit for sync to complete
         time.sleep(10)
         return True
     return False
 
 
-def create_dashboard(base_url, session_id, name, description=None):
-    """Create a new dashboard."""
+def create_dashboard(base_url, session_id, name, description=None, parameters=None):
+    """Create a new dashboard with optional filter parameters."""
     logger.info("Creating dashboard: %s", name)
     data = {"name": name}
     if description:
         data["description"] = description
+    if parameters:
+        data["parameters"] = parameters
     resp = api_request("POST", f"{base_url}/api/dashboard", session_id, data=data)
     if resp:
         logger.info("Dashboard created: id=%s name=%s", resp.get("id"), resp.get("name"))
@@ -165,20 +162,46 @@ def create_dashboard(base_url, session_id, name, description=None):
     return None
 
 
-def add_card_to_dashboard(base_url, session_id, dashboard_id, card_data):
-    """Add a card (question) to a dashboard."""
-    logger.info("Adding card '%s' to dashboard %s", card_data.get("name", ""), dashboard_id)
-    # First create the card/question
+def create_card(base_url, session_id, card_data):
+    """Create a card (question) — supports native SQL, GUI, and text cards."""
+    logger.info("Creating card '%s'", card_data.get("name", ""))
+
     question_data = {
         "name": card_data["name"],
         "display": card_data.get("display", "table"),
-        "dataset_query": {
+        "visualization_settings": card_data.get("visualization_settings", {}),
+    }
+
+    if card_data.get("display") == "text":
+        question_data["dataset_query"] = {
+            "type": "native",
+            "native": {"query": "SELECT 1"},
+            "database": card_data.get("database_id"),
+        }
+        if "text_content" in card_data:
+            question_data["visualization_settings"]["text"] = card_data["text_content"]
+    elif "native_query" in card_data:
+        dataset_query = {
+            "database": card_data.get("database_id"),
+            "type": "native",
+            "native": {"query": card_data["native_query"]},
+        }
+        template_tags = card_data.get("template_tags")
+        if template_tags:
+            tags_with_ids = {}
+            for tag_name, tag_def in template_tags.items():
+                tag_def = dict(tag_def)
+                tag_def["id"] = str(uuid.uuid4())
+                tags_with_ids[tag_name] = tag_def
+            dataset_query["native"]["template-tags"] = tags_with_ids
+        question_data["dataset_query"] = dataset_query
+    else:
+        question_data["dataset_query"] = {
             "database": card_data.get("database_id"),
             "type": "query",
             "query": card_data.get("query", {}),
-        },
-        "visualization_settings": card_data.get("visualization_settings", {}),
-    }
+        }
+
     card_resp = api_request(
         "POST",
         f"{base_url}/api/card",
@@ -190,23 +213,38 @@ def add_card_to_dashboard(base_url, session_id, dashboard_id, card_data):
         return None
     card_id = card_resp.get("id")
     logger.info("Card created: id=%s name=%s", card_id, card_resp.get("name"))
-    # Add card to dashboard
-    dashcard_data = {
-        "cardId": card_id,
-        "row": card_data.get("row", 0),
-        "col": card_data.get("col", 0),
-        "size_x": card_data.get("size_x", 4),
-        "size_y": card_data.get("size_y", 4),
-    }
+    return card_id
+
+
+def attach_cards_to_dashboard(base_url, session_id, dashboard_id, cards):
+    """Attach multiple cards to a dashboard with positions and parameter mappings."""
+    logger.info("Attaching %d cards to dashboard %s", len(cards), dashboard_id)
+    cards_payload = []
+    for idx, card in enumerate(cards, start=1):
+        entry = {
+            "id": -idx,
+            "card_id": card["card_id"],
+            "row": card.get("row", 0),
+            "col": card.get("col", 0),
+            "size_x": card.get("size_x", 4),
+            "size_y": card.get("size_y", 4),
+        }
+        mappings = card.get("parameter_mappings")
+        if mappings:
+            entry["parameter_mappings"] = [
+                {**m, "card_id": card["card_id"]} for m in mappings
+            ]
+        cards_payload.append(entry)
+
     resp = api_request(
-        "POST",
+        "PUT",
         f"{base_url}/api/dashboard/{dashboard_id}/cards",
         session_id,
-        data=dashcard_data,
+        data={"cards": cards_payload},
     )
-    if resp:
-        logger.info("Card added to dashboard.")
-    return card_id
+    if resp is not None:
+        logger.info("All cards attached to dashboard %s.", dashboard_id)
+    return resp
 
 
 def main():
@@ -228,12 +266,15 @@ def main():
 
     db_id = add_database_connection(args.base_url, session_id)
     if not db_id:
-        logger.error("Failed to add database connection.")
+        logger.error(
+            "Failed to add DuckDB database connection. "
+            "Make sure the data pipeline has been run:\n"
+            "    ./start.sh generate && ./start.sh build"
+        )
         sys.exit(1)
 
     sync_database(args.base_url, session_id, db_id)
 
-    # Load dashboard definitions and create them
     if DASHBOARD_DIR.exists():
         for dash_file in sorted(DASHBOARD_DIR.glob("*.json")):
             with open(dash_file) as f:
@@ -243,21 +284,29 @@ def main():
                 args.base_url, session_id,
                 dashboard_def["name"],
                 dashboard_def.get("description"),
+                dashboard_def.get("parameters"),
             )
             if not dash_id:
                 logger.warning("Skipping dashboard: %s", dashboard_def["name"])
                 continue
 
+            dash_cards = []
             for card in dashboard_def.get("cards", []):
                 card["database_id"] = db_id
-                add_card_to_dashboard(args.base_url, session_id, dash_id, card)
-                time.sleep(1)  # Rate limiting
+                card_id = create_card(args.base_url, session_id, card)
+                if card_id:
+                    card["card_id"] = card_id
+                    dash_cards.append(card)
+                time.sleep(0.5)
+
+            if dash_cards:
+                attach_cards_to_dashboard(
+                    args.base_url, session_id, dash_id, dash_cards
+                )
 
             logger.info("Dashboard '%s' completed.", dashboard_def["name"])
 
     logger.info("Metabase setup complete!")
-
-    # Print connection info
     logger.info("=" * 50)
     logger.info("Metabase is ready at %s", args.base_url)
     logger.info("Login: %s / %s", args.username, args.password)

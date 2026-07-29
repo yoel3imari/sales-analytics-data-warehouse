@@ -50,3 +50,78 @@ SALE_COLUMNS = [
 # Date range for dim_date
 DATE_START = "2022-01-01"
 DATE_END = "2026-12-31"
+
+# Kafka Streaming Configuration
+KAFKA_BOOTSTRAP_SERVERS = ["localhost:19092", "localhost:9092", "redpanda:9092"]
+KAFKA_SALES_TOPIC = "sales_events"
+
+POS_STORES = [
+    {
+        "store_id": "STORE-101",
+        "store_name": "NYC Flagship POS",
+        "ship_city": "New York",
+        "ship_state": "NY",
+        "ship_country": "USA",
+        "channel": "POS_Retail",
+        "terminals": ["POS-101-A", "POS-101-B", "POS-101-C"],
+    },
+    {
+        "store_id": "STORE-102",
+        "store_name": "LA Downtown POS",
+        "ship_city": "Los Angeles",
+        "ship_state": "CA",
+        "ship_country": "USA",
+        "channel": "POS_Retail",
+        "terminals": ["POS-102-A", "POS-102-B"],
+    },
+    {
+        "store_id": "STORE-103",
+        "store_name": "Chicago Loop POS",
+        "ship_city": "Chicago",
+        "ship_state": "IL",
+        "ship_country": "USA",
+        "channel": "POS_Retail",
+        "terminals": ["POS-103-A", "POS-103-B"],
+    },
+    {
+        "store_id": "STORE-104",
+        "store_name": "London Store POS",
+        "ship_city": "London",
+        "ship_state": "ENG",
+        "ship_country": "GBR",
+        "channel": "POS_Retail",
+        "terminals": ["POS-104-A"],
+    },
+    {
+        "store_id": "STORE-105",
+        "store_name": "E-Commerce Express POS",
+        "ship_city": "Austin",
+        "ship_state": "TX",
+        "ship_country": "USA",
+        "channel": "Online_Realtime",
+        "terminals": ["POS-WEB-01", "POS-WEB-02"],
+    },
+]
+
+STREAMING_SALE_COLUMNS = [
+    "event_id",
+    "order_id",
+    "line_item_id",
+    "order_date",
+    "store_id",
+    "store_name",
+    "pos_terminal_id",
+    "customer_id",
+    "product_id",
+    "quantity",
+    "unit_price",
+    "discount_amount",
+    "ship_date",
+    "ship_city",
+    "ship_state",
+    "ship_country",
+    "channel",
+    "payment_method",
+    "created_at",
+]
+

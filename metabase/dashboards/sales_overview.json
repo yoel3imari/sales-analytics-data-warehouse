@@ -1,68 +1,184 @@
 {
     "name": "Sales Overview",
     "description": "High-level sales performance metrics and trends",
+    "parameters": [
+        {
+            "id": "date_range",
+            "name": "Date Range",
+            "slug": "date_range",
+            "type": "date/all-options",
+            "sectionId": "date",
+            "default": "past30days"
+        },
+        {
+            "id": "channel",
+            "name": "Sales Channel",
+            "slug": "channel",
+            "type": "category",
+            "sectionId": null,
+            "default": null
+        }
+    ],
     "cards": [
         {
-            "name": "Total Revenue Over Time",
+            "name": "Key Metrics",
+            "display": "text",
+            "row": 0,
+            "col": 0,
+            "size_x": 24,
+            "size_y": 1,
+            "text_content": "## Key Metrics"
+        },
+        {
+            "name": "Total Revenue",
+            "display": "trend",
+            "row": 1,
+            "col": 0,
+            "size_x": 8,
+            "size_y": 3,
+            "native_query": "SELECT ROUND(SUM(net_revenue), 2) AS \"Total Revenue\" FROM main_gold.obt_sales WHERE 1=1 [[AND {{date_range}}]]",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
+                }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
+        },
+        {
+            "name": "Total Orders",
+            "display": "trend",
+            "row": 1,
+            "col": 8,
+            "size_x": 8,
+            "size_y": 3,
+            "native_query": "SELECT COUNT(DISTINCT order_id) AS \"Total Orders\" FROM main_gold.obt_sales WHERE 1=1 [[AND {{date_range}}]]",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
+                }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
+        },
+        {
+            "name": "Average Order Value",
+            "display": "trend",
+            "row": 1,
+            "col": 16,
+            "size_x": 8,
+            "size_y": 3,
+            "native_query": "SELECT ROUND(SUM(net_revenue) / NULLIF(COUNT(DISTINCT order_id), 0), 2) AS \"Average Order Value\" FROM main_gold.obt_sales WHERE 1=1 [[AND {{date_range}}]]",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
+                }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
+        },
+        {
+            "name": "Revenue Analysis",
+            "display": "text",
+            "row": 2,
+            "col": 0,
+            "size_x": 24,
+            "size_y": 1,
+            "text_content": "## Revenue Analysis"
+        },
+        {
+            "name": "Daily Revenue Trend",
             "display": "line",
-            "row": 0,
+            "row": 3,
             "col": 0,
-            "size_x": 8,
+            "size_x": 12,
             "size_y": 6,
-            "query": {
-                "source-table": null,
-                "query": {
-                    "source-query": {
-                        "source-table": null,
-                        "aggregation": [["sum", ["field", "net_revenue", null]]],
-                        "breakout": [["field", "order_month", {"source-field": "order_date_sk"}]]
-                    }
+            "native_query": "SELECT order_date AS \"Date\", ROUND(SUM(net_revenue), 2) AS \"Revenue\" FROM main_gold.obt_sales WHERE 1=1 [[AND {{date_range}}]] GROUP BY 1 ORDER BY 1",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
                 }
-            }
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                }
+            ]
         },
         {
-            "name": "Revenue by Product Category",
+            "name": "Revenue by Sales Channel",
             "display": "bar",
-            "row": 0,
-            "col": 8,
-            "size_x": 8,
+            "row": 3,
+            "col": 12,
+            "size_x": 12,
             "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["sum", ["field", "net_revenue", null]]],
-                    "breakout": [["field", "category", null]]
+            "native_query": "SELECT channel AS \"Channel\", ROUND(SUM(net_revenue), 2) AS \"Revenue\" FROM main_gold.obt_sales WHERE 1=1 [[AND {{date_range}}]] [[AND {{channel}}]] GROUP BY 1 ORDER BY 2 DESC",
+            "template_tags": {
+                "date_range": {
+                    "name": "date_range",
+                    "display_name": "Date Range",
+                    "type": "dimension",
+                    "dimension": ["field", "order_date", {"base-type": "type/Date"}],
+                    "widget-type": "date/all-options",
+                    "required": false,
+                    "default": "past30days"
+                },
+                "channel": {
+                    "name": "channel",
+                    "display_name": "Sales Channel",
+                    "type": "dimension",
+                    "dimension": ["field", "channel", {"base-type": "type/Text"}],
+                    "widget-type": "category",
+                    "required": false
                 }
-            }
-        },
-        {
-            "name": "Sales by Day of Week",
-            "display": "bar",
-            "row": 6,
-            "col": 0,
-            "size_x": 8,
-            "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["count", []]],
-                    "breakout": [["field", "order_day_name", null]]
+            },
+            "parameter_mappings": [
+                {
+                    "parameter_id": "date_range",
+                    "target": ["variable", ["template-tag", "date_range"]]
+                },
+                {
+                    "parameter_id": "channel",
+                    "target": ["variable", ["template-tag", "channel"]]
                 }
-            }
-        },
-        {
-            "name": "Top 10 Customers by Revenue",
-            "display": "table",
-            "row": 6,
-            "col": 8,
-            "size_x": 8,
-            "size_y": 6,
-            "query": {
-                "query": {
-                    "aggregation": [["sum", ["field", "net_revenue", null]]],
-                    "breakout": [["field", "customer_id", null], ["field", "first_name", null], ["field", "last_name", null]],
-                    "order-by": [["desc", ["aggregation", 0]]],
-                    "limit": 10
-                }
-            }
+            ]
         }
     ]
 }

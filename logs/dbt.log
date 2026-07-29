@@ -1,0 +1,65 @@
+[0m23:37:50.359558 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e142930>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e36e7e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e36e2d0>]}
+
+
+============================== 23:37:50.372300 | b1b28342-a517-4cc1-bac3-32146406318b ==============================
+[0m23:37:50.372300 [info ] [MainThread]: Running with dbt=1.12.0
+[0m23:37:50.374063 [debug] [MainThread]: running dbt with arguments {'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'hints_enabled': 'True', 'partial_parse': 'True', 'empty': 'None', 'cache_selected_only': 'False', 'static_parser': 'True', 'fail_fast': 'False', 'use_experimental_parser': 'False', 'no_print': 'None', 'log_path': 'logs', 'use_colors': 'True', 'profiles_dir': '/Users/yusef/.dbt', 'maximum_seed_size_mib': '1', 'target_path': 'None', 'warn_error': 'None', 'debug': 'False', 'invocation_command': 'dbt init dbt_project', 'quiet': 'False', 'printer_width': '80', 'write_json': 'True', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'log_cache_events': 'False', 'log_format': 'default', 'version_check': 'True', 'introspect': 'True'}
+[0m23:37:50.412281 [info ] [MainThread]: Creating dbt configuration folder at /Users/yusef/.dbt
+[0m23:37:50.414496 [info ] [MainThread]: A project called dbt_project already exists here.
+[0m23:37:50.417416 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.22878484, "process_in_blocks": "0", "process_kernel_time": 0.364338, "process_mem_max_rss": "108257280", "process_out_blocks": "0", "process_user_time": 2.500083}
+[0m23:37:50.418418 [debug] [MainThread]: Command `dbt init` succeeded at 23:37:50.418206 after 0.23 seconds
+[0m23:37:50.419117 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e2d6f60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d1a5910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c2dc470>]}
+[0m23:37:50.419853 [debug] [MainThread]: Flushing usage events
+[0m23:37:51.347559 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:38:26.744796 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104b7f9b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10569fe00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10569f9b0>]}
+
+
+============================== 23:38:26.755711 | 6661ecd2-b34c-41e8-a96c-35132d89b62a ==============================
+[0m23:38:26.755711 [info ] [MainThread]: Running with dbt=1.12.0
+[0m23:38:26.756799 [debug] [MainThread]: running dbt with arguments {'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'log_cache_events': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'log_format': 'default', 'indirect_selection': 'eager', 'log_path': 'logs', 'partial_parse': 'True', 'static_parser': 'True', 'fail_fast': 'False', 'write_json': 'True', 'version_check': 'True', 'warn_error': 'None', 'hints_enabled': 'True', 'cache_selected_only': 'False', 'use_colors': 'True', 'maximum_seed_size_mib': '1', 'debug': 'False', 'invocation_command': 'dbt run', 'target_path': 'None', 'empty': 'False', 'no_print': 'None', 'introspect': 'True', 'profiles_dir': '/Users/yusef/.dbt', 'printer_width': '80'}
+[0m23:38:26.757910 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/yusef/projects/portfolio/sales-analytics/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m23:38:26.759018 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.21220559, "process_in_blocks": "0", "process_kernel_time": 0.269885, "process_mem_max_rss": "108437504", "process_out_blocks": "0", "process_user_time": 2.464063}
+[0m23:38:26.759979 [debug] [MainThread]: Command `dbt run` failed at 23:38:26.759760 after 0.21 seconds
+[0m23:38:26.760682 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10569ff80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10569f7d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10569f2f0>]}
+[0m23:38:26.761351 [debug] [MainThread]: Flushing usage events
+[0m23:38:27.813592 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m23:38:49.900345 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ee8ec30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f892750>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f892390>]}
+
+
+============================== 23:38:49.911469 | b5245885-0eee-429d-84f5-83ab39cba3b9 ==============================
+[0m23:38:49.911469 [info ] [MainThread]: Running with dbt=1.12.0
+[0m23:38:49.912850 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'debug': 'False', 'log_format': 'default', 'use_colors': 'True', 'static_parser': 'True', 'warn_error': 'None', 'no_print': 'None', 'target_path': 'None', 'write_json': 'True', 'printer_width': '80', 'partial_parse': 'True', 'cache_selected_only': 'False', 'invocation_command': 'dbt init', 'empty': 'None', 'send_anonymous_usage_stats': 'True', 'hints_enabled': 'True', 'log_path': 'logs', 'quiet': 'False', 'indirect_selection': 'eager', 'maximum_seed_size_mib': '1', 'profiles_dir': '/Users/yusef/.dbt', 'introspect': 'True', 'log_cache_events': 'False', 'use_experimental_parser': 'False', 'fail_fast': 'False'}
+[0m23:38:58.146065 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+
+[0m23:38:58.157662 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 190, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 136, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/dbt/cli/main.py", line 503, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/dbt/task/init.py", line 337, in run
+    project_name = self.get_valid_project_name()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/dbt/task/init.py", line 280, in get_valid_project_name
+    name = click.prompt("Enter a name for your project (letters, digits, underscore)")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/click/termui.py", line 218, in prompt
+    value = prompt_func(prompt)
+            ^^^^^^^^^^^^^^^^^^^
+  File "/Users/yusef/projects/portfolio/sales-analytics/.venv/lib/python3.12/site-packages/click/termui.py", line 201, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m23:38:58.159739 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": false, "command_wall_clock_time": 8.420847, "process_in_blocks": "0", "process_kernel_time": 0.379921, "process_mem_max_rss": "108285952", "process_out_blocks": "0", "process_user_time": 2.503702}
+[0m23:38:58.161717 [debug] [MainThread]: Command `dbt init` failed at 23:38:58.161221 after 8.42 seconds
+[0m23:38:58.163309 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f8925a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f219880>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f917da0>]}
+[0m23:38:58.164806 [debug] [MainThread]: Flushing usage events
+[0m23:38:59.121649 [debug] [MainThread]: An error was encountered while trying to flush usage events

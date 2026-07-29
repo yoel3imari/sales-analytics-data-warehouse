@@ -60,3 +60,27 @@ sources:
           - name: ship_state
           - name: ship_country
           - name: channel
+
+      - name: raw_sales_stream
+        description: "Real-time streaming sales events from Kafka multi-POS terminals"
+        columns:
+          - name: event_id
+          - name: order_id
+          - name: line_item_id
+          - name: order_date
+          - name: store_id
+          - name: store_name
+          - name: pos_terminal_id
+          - name: customer_id
+          - name: product_id
+          - name: quantity
+          - name: unit_price
+          - name: discount_amount
+          - name: ship_date
+          - name: ship_city
+          - name: ship_state
+          - name: ship_country
+          - name: channel
+          - name: payment_method
+          - name: created_at
+

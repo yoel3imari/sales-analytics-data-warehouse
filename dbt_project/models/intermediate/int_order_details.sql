@@ -60,8 +60,13 @@ joined as (
         s.ship_state,
         s.ship_country,
 
-        -- Channel
+        -- Channel & POS Store details
         s.channel,
+        s.store_id,
+        s.store_name,
+        s.pos_terminal_id,
+        s.payment_method,
+        s.is_streaming,
 
         -- Bad data flag
         s.is_bad_data_record
